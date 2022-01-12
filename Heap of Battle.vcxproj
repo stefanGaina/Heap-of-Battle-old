@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{4f92f9cc-17d1-4838-babb-d9f6ffba6bb7}</ProjectGuid>
+    <RootNamespace>HeapofBattle</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\Scenario2\Sound;$(SolutionDir)src\Scenario2\Pause;$(SolutionDir)src\Scenario2\Menu;$(SolutionDir)src\Scenario2\Map;$(SolutionDir)src\Scenario2\Game;$(SolutionDir)src\Scenario2\Cursor;$(SolutionDir)src\Scenario2\Combat;$(SolutionDir)src\Scenario2\Account;$(SolutionDir)src\Scenario1\Sound;$(SolutionDir)src\Scenario1\Pause;$(SolutionDir)src\Scenario1\Menu;$(SolutionDir)src\Scenario1\Map;$(SolutionDir)src\Scenario1\Game;$(SolutionDir)src\Scenario1\Cursor;$(SolutionDir)src\Scenario1\Combat;$(SolutionDir)src\Scenario1\Account;$(SolutionDir)src\Base\Sound;$(SolutionDir)src\Base\Pause;$(SolutionDir)src\Base\Menu;$(SolutionDir)src\Base\Map;$(SolutionDir)src\Base\Game;$(SolutionDir)src\Base\Cursor;$(SolutionDir)src\Base\Combat;$(SolutionDir)src\Base\Account;$(SolutionDir)src\Auxiliary;$(SolutionDir)src;$(SolutionDir)dep\SDL2_mixer\include;$(SolutionDir)dep\SDL2_ttf\include;$(SolutionDir)dep\SDL2_image\include;$(SolutionDir)dep\SDL2\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dep\SDL2_mixer\lib\x64;$(SolutionDir)dep\SDL2_ttf\lib\x64;$(SolutionDir)dep\SDL2_image\lib\x64;$(SolutionDir)dep\SDL2\lib\x64</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\Scenario2\Sound;$(SolutionDir)src\Scenario2\Pause;$(SolutionDir)src\Scenario2\Menu;$(SolutionDir)src\Scenario2\Map;$(SolutionDir)src\Scenario2\Game;$(SolutionDir)src\Scenario2\Cursor;$(SolutionDir)src\Scenario2\Combat;$(SolutionDir)src\Scenario2\Account;$(SolutionDir)src\Scenario1\Sound;$(SolutionDir)src\Scenario1\Pause;$(SolutionDir)src\Scenario1\Menu;$(SolutionDir)src\Scenario1\Map;$(SolutionDir)src\Scenario1\Game;$(SolutionDir)src\Scenario1\Cursor;$(SolutionDir)src\Scenario1\Combat;$(SolutionDir)src\Scenario1\Account;$(SolutionDir)src\Base\Sound;$(SolutionDir)src\Base\Pause;$(SolutionDir)src\Base\Menu;$(SolutionDir)src\Base\Map;$(SolutionDir)src\Base\Game;$(SolutionDir)src\Base\Cursor;$(SolutionDir)src\Base\Combat;$(SolutionDir)src\Base\Account;$(SolutionDir)src\Auxiliary;$(SolutionDir)src;$(SolutionDir)dep\SDL2_mixer\include;$(SolutionDir)dep\SDL2_ttf\include;$(SolutionDir)dep\SDL2_image\include;$(SolutionDir)dep\SDL2\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dep\SDL2_mixer\lib\x64;$(SolutionDir)dep\SDL2_ttf\lib\x64;$(SolutionDir)dep\SDL2_image\lib\x64;$(SolutionDir)dep\SDL2\lib\x64</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\Scenario2\Sound;$(SolutionDir)src\Scenario2\Pause;$(SolutionDir)src\Scenario2\Menu;$(SolutionDir)src\Scenario2\Map;$(SolutionDir)src\Scenario2\Game;$(SolutionDir)src\Scenario2\Cursor;$(SolutionDir)src\Scenario2\Combat;$(SolutionDir)src\Scenario2\Account;$(SolutionDir)src\Scenario1\Sound;$(SolutionDir)src\Scenario1\Pause;$(SolutionDir)src\Scenario1\Menu;$(SolutionDir)src\Scenario1\Map;$(SolutionDir)src\Scenario1\Game;$(SolutionDir)src\Scenario1\Cursor;$(SolutionDir)src\Scenario1\Combat;$(SolutionDir)src\Scenario1\Account;$(SolutionDir)src\Base\Sound;$(SolutionDir)src\Base\Pause;$(SolutionDir)src\Base\Menu;$(SolutionDir)src\Base\Map;$(SolutionDir)src\Base\Game;$(SolutionDir)src\Base\Cursor;$(SolutionDir)src\Base\Combat;$(SolutionDir)src\Base\Account;$(SolutionDir)src\Auxiliary;$(SolutionDir)src;$(SolutionDir)dep\SDL2_mixer\include;$(SolutionDir)dep\SDL2_ttf\include;$(SolutionDir)dep\SDL2_image\include;$(SolutionDir)dep\SDL2\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dep\SDL2_mixer\lib\x64;$(SolutionDir)dep\SDL2_ttf\lib\x64;$(SolutionDir)dep\SDL2_image\lib\x64;$(SolutionDir)dep\SDL2\lib\x64</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\Scenario2\Sound;$(SolutionDir)src\Scenario2\Pause;$(SolutionDir)src\Scenario2\Menu;$(SolutionDir)src\Scenario2\Map;$(SolutionDir)src\Scenario2\Game;$(SolutionDir)src\Scenario2\Cursor;$(SolutionDir)src\Scenario2\Combat;$(SolutionDir)src\Scenario2\Account;$(SolutionDir)src\Scenario1\Sound;$(SolutionDir)src\Scenario1\Pause;$(SolutionDir)src\Scenario1\Menu;$(SolutionDir)src\Scenario1\Map;$(SolutionDir)src\Scenario1\Game;$(SolutionDir)src\Scenario1\Cursor;$(SolutionDir)src\Scenario1\Combat;$(SolutionDir)src\Scenario1\Account;$(SolutionDir)src\Base\Sound;$(SolutionDir)src\Base\Pause;$(SolutionDir)src\Base\Menu;$(SolutionDir)src\Base\Map;$(SolutionDir)src\Base\Game;$(SolutionDir)src\Base\Cursor;$(SolutionDir)src\Base\Combat;$(SolutionDir)src\Base\Account;$(SolutionDir)src\Auxiliary;$(SolutionDir)src;$(SolutionDir)dep\SDL2_mixer\include;$(SolutionDir)dep\SDL2_ttf\include;$(SolutionDir)dep\SDL2_image\include;$(SolutionDir)dep\SDL2\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2_mixer.lib;SDL2_ttf.lib;SDL2_image.lib;SDL2main.lib;SDL2.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)dep\SDL2_mixer\lib\x64;$(SolutionDir)dep\SDL2_ttf\lib\x64;$(SolutionDir)dep\SDL2_image\lib\x64;$(SolutionDir)dep\SDL2\lib\x64</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Auxiliary\Enable.cpp" />
+    <ClCompile Include="src\Auxiliary\Queue.cpp" />
+    <ClCompile Include="src\Auxiliary\Run.cpp" />
+    <ClCompile Include="src\Auxiliary\TextureManager.cpp" />
+    <ClCompile Include="src\Base\Account\Account0.cpp" />
+    <ClCompile Include="src\Base\Account\Finance.cpp" />
+    <ClCompile Include="src\Base\Account\Price.cpp" />
+    <ClCompile Include="src\Base\Account\Turn.cpp" />
+    <ClCompile Include="src\Base\Combat\Animation.cpp" />
+    <ClCompile Include="src\Base\Combat\AnimationTexture.cpp" />
+    <ClCompile Include="src\Base\Combat\Combat0.cpp" />
+    <ClCompile Include="src\Base\Combat\Highlight.cpp" />
+    <ClCompile Include="src\Base\Combat\Movement.cpp" />
+    <ClCompile Include="src\Base\Combat\TileInfo.cpp" />
+    <ClCompile Include="src\Base\Combat\Unit.cpp" />
+    <ClCompile Include="src\Base\Cursor\Cursor.cpp" />
+    <ClCompile Include="src\Base\Cursor\Outline0.cpp" />
+    <ClCompile Include="src\Base\Game\Game0.cpp" />
+    <ClCompile Include="src\Base\Map\Border.cpp" />
+    <ClCompile Include="src\Base\Map\Building0.cpp" />
+    <ClCompile Include="src\Base\Map\Corpse0.cpp" />
+    <ClCompile Include="src\Base\Map\Grid0.cpp" />
+    <ClCompile Include="src\Base\Map\Map0.cpp" />
+    <ClCompile Include="src\Base\Map\Tile0.cpp" />
+    <ClCompile Include="src\Base\Menu\Frame.cpp" />
+    <ClCompile Include="src\Base\Menu\Icon.cpp" />
+    <ClCompile Include="src\Base\Menu\Menu0.cpp" />
+    <ClCompile Include="src\Base\Menu\Write.cpp" />
+    <ClCompile Include="src\Base\Pause\Pause.cpp" />
+    <ClCompile Include="src\Base\Pause\Save.cpp" />
+    <ClCompile Include="src\Base\Pause\Victory.cpp" />
+    <ClCompile Include="src\Base\Sound\Sound0.cpp" />
+    <ClCompile Include="src\Base\Sound\SoundEffect.cpp" />
+    <ClCompile Include="src\Base\Sound\VoiceLine.cpp" />
+    <ClCompile Include="src\Main\Main.cpp" />
+    <ClCompile Include="src\Main\MainMenu\Load.cpp" />
+    <ClCompile Include="src\Main\MainMenu\MainMenu.cpp" />
+    <ClCompile Include="src\Main\MainMenu\CursorMenu.cpp" />
+    <ClCompile Include="src\Main\MainMenu\SelectMap.cpp" />
+    <ClCompile Include="src\Main\MainMenu\Text.cpp" />
+    <ClCompile Include="src\Main\SDL\InitSDL.cpp" />
+    <ClCompile Include="src\Scenario1\Account\Account1.cpp" />
+    <ClCompile Include="src\Scenario1\Account\Capture.cpp" />
+    <ClCompile Include="src\Scenario1\Account\Vamp.cpp" />
+    <ClCompile Include="src\Scenario1\Combat\Combat1.cpp" />
+    <ClCompile Include="src\Scenario1\Cursor\Outline1.cpp" />
+    <ClCompile Include="src\Scenario1\Game\Game1.cpp" />
+    <ClCompile Include="src\Scenario1\Map\Building1.cpp" />
+    <ClCompile Include="src\Scenario1\Map\Corpse1.cpp" />
+    <ClCompile Include="src\Scenario1\Map\Grid1.cpp" />
+    <ClCompile Include="src\Scenario1\Map\Map1.cpp" />
+    <ClCompile Include="src\Scenario1\Map\Tile1.cpp" />
+    <ClCompile Include="src\Scenario1\Menu\Menu1.cpp" />
+    <ClCompile Include="src\Scenario1\Sound\Sound1.cpp" />
+    <ClCompile Include="src\Scenario2\Account\Account2.cpp" />
+    <ClCompile Include="src\Scenario2\Combat\Combat2.cpp" />
+    <ClCompile Include="src\Scenario2\Cursor\Outline2.cpp" />
+    <ClCompile Include="src\Scenario2\Game\Game2.cpp" />
+    <ClCompile Include="src\Scenario2\Map\Building2.cpp" />
+    <ClCompile Include="src\Scenario2\Map\Corpse2.cpp" />
+    <ClCompile Include="src\Scenario2\Map\Grid2.cpp" />
+    <ClCompile Include="src\Scenario2\Map\Map2.cpp" />
+    <ClCompile Include="src\Scenario2\Map\Tile2.cpp" />
+    <ClCompile Include="src\Scenario2\Menu\Menu2.cpp" />
+    <ClCompile Include="src\Scenario2\Sound\Sound2.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Auxiliary\Enable.h" />
+    <ClInclude Include="src\Auxiliary\Language.h" />
+    <ClInclude Include="src\Auxiliary\Log.h" />
+    <ClInclude Include="src\Auxiliary\Queue.h" />
+    <ClInclude Include="src\Auxiliary\Run.h" />
+    <ClInclude Include="src\Auxiliary\TextureManager.h" />
+    <ClInclude Include="src\Base\Account\Account0.h" />
+    <ClInclude Include="src\Base\Account\Finance.h" />
+    <ClInclude Include="src\Base\Account\Price.h" />
+    <ClInclude Include="src\Base\Account\Turn.h" />
+    <ClInclude Include="src\Base\Combat\Animation.h" />
+    <ClInclude Include="src\Base\Combat\AnimationTexture.h" />
+    <ClInclude Include="src\Base\Combat\Combat0.h" />
+    <ClInclude Include="src\Base\Combat\Highlight.h" />
+    <ClInclude Include="src\Base\Combat\Movement.h" />
+    <ClInclude Include="src\Base\Combat\TileInfo.h" />
+    <ClInclude Include="src\Base\Combat\Unit.h" />
+    <ClInclude Include="src\Base\Cursor\Cursor.h" />
+    <ClInclude Include="src\Base\Cursor\Outline0.h" />
+    <ClInclude Include="src\Base\Game\Game0.h" />
+    <ClInclude Include="src\Base\Map\Border.h" />
+    <ClInclude Include="src\Base\Map\Building0.h" />
+    <ClInclude Include="src\Base\Map\Corpse0.h" />
+    <ClInclude Include="src\Base\Map\Grid0.h" />
+    <ClInclude Include="src\Base\Map\Map0.h" />
+    <ClInclude Include="src\Base\Map\Tile0.h" />
+    <ClInclude Include="src\Base\Menu\Frame.h" />
+    <ClInclude Include="src\Base\Menu\Icon.h" />
+    <ClInclude Include="src\Base\Menu\Menu0.h" />
+    <ClInclude Include="src\Base\Menu\Write.h" />
+    <ClInclude Include="src\Base\Pause\Pause.h" />
+    <ClInclude Include="src\Base\Pause\Save.h" />
+    <ClInclude Include="src\Base\Pause\Victory.h" />
+    <ClInclude Include="src\Base\Sound\Sound0.h" />
+    <ClInclude Include="src\Base\Sound\SoundEffect.h" />
+    <ClInclude Include="src\Base\Sound\VoiceLine.h" />
+    <ClInclude Include="src\Main\MainMenu\Load.h" />
+    <ClInclude Include="src\Main\MainMenu\MainMenu.h" />
+    <ClInclude Include="src\Main\MainMenu\CursorMenu.h" />
+    <ClInclude Include="src\Main\MainMenu\SelectMap.h" />
+    <ClInclude Include="src\Main\MainMenu\Text.h" />
+    <ClInclude Include="src\Main\SDL\InitSDL.h" />
+    <ClInclude Include="src\Scenario1\Account\Account1.h" />
+    <ClInclude Include="src\Scenario1\Account\Capture.h" />
+    <ClInclude Include="src\Scenario1\Account\Vamp.h" />
+    <ClInclude Include="src\Scenario1\Combat\Combat1.h" />
+    <ClInclude Include="src\Scenario1\Cursor\Outline1.h" />
+    <ClInclude Include="src\Scenario1\Game\Game1.h" />
+    <ClInclude Include="src\Scenario1\Map\Building1.h" />
+    <ClInclude Include="src\Scenario1\Map\Corpse1.h" />
+    <ClInclude Include="src\Scenario1\Map\Grid1.h" />
+    <ClInclude Include="src\Scenario1\Map\Map1.h" />
+    <ClInclude Include="src\Scenario1\Map\Tile1.h" />
+    <ClInclude Include="src\Scenario1\Menu\Menu1.h" />
+    <ClInclude Include="src\Scenario1\Sound\Sound1.h" />
+    <ClInclude Include="src\Scenario2\Account\Account2.h" />
+    <ClInclude Include="src\Scenario2\Combat\Combat2.h" />
+    <ClInclude Include="src\Scenario2\Cursor\Outline2.h" />
+    <ClInclude Include="src\Scenario2\Game\Game2.h" />
+    <ClInclude Include="src\Scenario2\Map\Building2.h" />
+    <ClInclude Include="src\Scenario2\Map\Corpse2.h" />
+    <ClInclude Include="src\Scenario2\Map\Grid2.h" />
+    <ClInclude Include="src\Scenario2\Map\Map2.h" />
+    <ClInclude Include="src\Scenario2\Map\Tile2.h" />
+    <ClInclude Include="src\Scenario2\Menu\Menu2.h" />
+    <ClInclude Include="src\Scenario2\Sound\Sound2.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="save.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
