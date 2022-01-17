@@ -1,6 +1,7 @@
 #include "Account0.h"
 
-Income0::Income0(Receipt receipt) : gold(receipt.gold), yield(receipt.yield)
+Income0::Income0(Receipt receipt) : 
+	gold(receipt.gold), yield(receipt.yield)
 {
 }
 
@@ -9,11 +10,13 @@ Receipt Income0::get(void)
 	return { gold.get(), yield.get() };
 }
 
-Income::Income(Receipt human, Receipt orc) : human(human), orc(orc)
+Income::Income(Receipt human, Receipt orc) : 
+	human(human), orc(orc)
 {
 }
 
-Account0::Account0(Receipt human, Receipt orc) : price(PriceValue::vamp), income(human, orc)
+Account0::Account0(Receipt human, Receipt orc) : 
+	price(PriceValue::VAMP), income(human, orc)
 {
 }
 

@@ -2,12 +2,12 @@
 
 TileInfo::TileInfo(void)
 {
-	for (Uint8 row = 0; row < ROW; ++row)
+	for (size_t row = 0; row < ROW; ++row)
 	{
-		for (Uint8 column = 0; column < COLUMN; ++column)
+		for (size_t column = 0; column < COLUMN; ++column)
 		{
 			info[row][column].state = State::NEUTRAL;
-			info[row][column].show = Show::nothing;
+			info[row][column].show = Show::NOTHING;
 			info[row][column].highlight = Color::UNHIGHLIGHT;
 			info[row][column].distance = 10;
 			info[row][column].actionsLeft = 0;
@@ -15,14 +15,14 @@ TileInfo::TileInfo(void)
 			info[row][column].notSelected = false;
 		}
 	}
-	for (Uint8 column = 4; column < COLUMN - 4; ++column)
+	for (size_t column = 4; column < COLUMN - 4; ++column)
 	{
 		info[0][column].state = State::BLANK;
 		info[ROW - 1][column].state = State::BLANK;
 	}
-	for (Uint8 row = 0; row < ROW; ++row)
+	for (size_t row = 0; row < ROW; ++row)
 	{
-		for (Uint8 column = 0; column < 4; ++column)
+		for (size_t column = 0; column < 4; ++column)
 		{
 			info[row][column].state = State::BLANK;
 			info[row][COLUMN - 1 - column].state = State::BLANK;

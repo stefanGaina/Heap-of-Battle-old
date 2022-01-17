@@ -3,12 +3,12 @@
 
 enum class PriceValue
 {
-	empty = 0,
-	infantry = 5,
-	archer = 10,
-	knight = 20,
-	wing = 30,
-	vamp = 40,
+	EMPTY = 0,
+	INFANTRY = 5,
+	ARCHER = 10,
+	KNIGHT = 20,
+	WING = 30,
+	VAMP = 40,
 };
 
 class Price

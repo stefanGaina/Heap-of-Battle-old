@@ -1,7 +1,8 @@
 #include "Load.h"
 #include <iostream>
 
-Load::Load(void) : fin("save.txt", std::ios::in)
+Load::Load(void) : 
+	fin("save.txt", std::ios::in)
 {
 	if (!fin.is_open())
 	{

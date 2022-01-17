@@ -42,10 +42,12 @@ enum class Engage
 	NO = 0,
 
 	PAUSE = 1,
-	VICTORY = 4,
+	VICTORY = 5,
 
 	KEEP = 2,
-	UNIT = 3,
+	KEEP_1 = 2,
+	KEEP_2 = 3,
+	UNIT = 4,
 };
 
 enum class State
@@ -58,7 +60,8 @@ enum class State
 	HUMAN_KNIGHT = 3,
 	HUMAN_WING = 4,
 	HUMAN_KEEP = 5,
-	HUMAN_BARRACK = 5,
+	HUMAN_KEEP_1 = 5,
+	HUMAN_KEEP_2 = 6,
 
 	TRAIN_HUMAN_INFANTRY = 11,
 	TRAIN_HUMAN_ARCHER = 12,
@@ -78,7 +81,8 @@ enum class State
 	ORC_KNIGHT = -3,
 	ORC_WING = -4,
 	ORC_KEEP = -5,
-	ORC_BARRACK = -5,
+	ORC_KEEP_1 = -5,
+	ORC_KEEP_2 = -6,
 
 	TRAIN_ORC_INFANTRY = -11,
 	TRAIN_ORC_ARCHER = -12,
@@ -98,17 +102,17 @@ enum class State
 
 enum class Show
 {
-	nothing = 0,
+	NOTHING = 0,
 
-	human_infantry = 1,
-	human_archer = 2,
-	human_knight = 3,
-	human_wing = 4,
+	HUMAN_INFANTRY = 1,
+	HUMAN_ARCHER = 2,
+	HUMAN_KNIGHT = 3,
+	HUMAN_WING = 4,
 
-	orc_infantry = -1,
-	orc_archer = -2,
-	orc_knight = -3,
-	orc_wing = -4,
+	ORC_INFANTRY = -1,
+	ORC_ARCHER = -2,
+	ORC_KNIGHT = -3,
+	ORC_WING = -4,
 };
 
 enum class Sound

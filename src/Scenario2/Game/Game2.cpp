@@ -65,9 +65,9 @@ void Game2::handleEvents(void)
 									humanNo(state, click);
 									break;
 								}
-								case Engage::KEEP:
+								case Engage::KEEP_1:
 								{
-									if (!humanBuilding(state))
+									if (!humanKeep1(state))
 									{
 										humanNo(state, click);
 									}
@@ -237,10 +237,10 @@ void Game2::passTurn(void)
 
 void Game2::humanNo(State state, Coordinate click)
 {
-	if (state == State::HUMAN_BARRACK)
+	if (state == State::HUMAN_KEEP_1)
 	{
-		combat.engage(Engage::KEEP);
-		menu.set(State::HUMAN_KEEP, 0, 0, false);
+		combat.engage(Engage::KEEP_1);
+		menu.set(State::HUMAN_KEEP, 0, 0);
 	}
 	else
 	{
@@ -258,7 +258,7 @@ void Game2::humanNo(State state, Coordinate click)
 	}
 }
 
-bool Game2::humanBuilding(State state)
+bool Game2::humanKeep1(State state)
 {
 	if (state >= State::TRAIN_HUMAN_INFANTRY && state <= State::TRAIN_HUMAN_WING)
 	{
@@ -284,31 +284,7 @@ bool Game2::humanBuilding(State state)
 	}
 	else
 	{
-		if (state == State::VAMP_HUMAN_KEEP)
-		{
-			/*if (account.human.vamp.get())
-			{
-				sound.soundEffect.play(Sound::error);
-			}
-			else
-			{
-				if (account.canAfford(State::human_keep))
-				{
-					map.building.vampHumanKeep();
-					account.vamp(Faction::human);
-					sound.soundEffect.play(Sound::vamp);
-					menu.set(State::human_keep, 0, 0, true);
-				}
-				else
-				{
-					sound.soundEffect.play(Sound::human_more_gold);
-				}
-			}*/
-		}
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 	return true;
 }
@@ -318,7 +294,7 @@ void Game2::orcNo(State state, Coordinate click)
 	if (state == State::ORC_KEEP)
 	{
 		combat.engage(Engage::KEEP);
-		//menu.set(State::orc_keep, 0, 0, account.orc.vamp.get());
+		menu.set(State::ORC_KEEP, 0, 0);
 	}
 	else
 	{

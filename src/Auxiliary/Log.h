@@ -1,6 +1,6 @@
 #pragma once
 
-#if 1
+#if 1 // 1 for debug, 0 for release
 #include <iostream>
 
 #define DEBUG

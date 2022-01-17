@@ -58,35 +58,35 @@ SDL_Texture** AnimationTexture::setDefender(Show defender)
 {
 	switch (defender)
 	{
-		case Show::human_infantry:
+		case Show::HUMAN_INFANTRY:
 		{
 			return human.infantry.death;
 		}
-		case Show::human_archer:
+		case Show::HUMAN_ARCHER:
 		{
 			return human.archer.death;
 		}
-		case Show::human_knight:
+		case Show::HUMAN_KNIGHT:
 		{
 			return human.knight.death;
 		}
-		case Show::human_wing:
+		case Show::HUMAN_WING:
 		{
 			return human.wing.death;
 		}
-		case Show::orc_infantry:
+		case Show::ORC_INFANTRY:
 		{
 			return orc.infantry.death;
 		}
-		case Show::orc_archer:
+		case Show::ORC_ARCHER:
 		{
 			return orc.archer.death;
 		}
-		case Show::orc_knight:
+		case Show::ORC_KNIGHT:
 		{
 			return orc.knight.death;
 		}
-		case Show::orc_wing:
+		case Show::ORC_WING:
 		{
 			return orc.wing.death;
 		}
@@ -458,7 +458,7 @@ void AnimationTexture::loadTextures(void)
 
 void AnimationTexture::destroyTextures(void)
 {
-	for (Uint8 i = 0; i < ANIMATION_FRAMES; ++i)
+	for (size_t i = 0; i < ANIMATION_FRAMES; ++i)
 	{
 		TextureManager::destroy(human.infantry.left[i]);
 		TextureManager::destroy(human.infantry.up[i]);

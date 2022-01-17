@@ -1,4 +1,5 @@
 #include "Save.h"
+
 #include <iostream>
 
 Save::Save(void) : fout("save.txt", std::ios::out)

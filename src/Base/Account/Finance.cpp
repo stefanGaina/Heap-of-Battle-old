@@ -1,8 +1,8 @@
 #include "Finance.h"
 
-Finance::Finance(Uint8 value)
+Finance::Finance(Uint8 value) :
+	value(value)
 {
-	this->value = value;
 }
 
 Uint8 Finance::get(void)

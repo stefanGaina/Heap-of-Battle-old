@@ -1,7 +1,8 @@
 #include "Victory.h"
 #include "TextureManager.h"
 
-Art::Art(SDL_Texture* texture) : texture(texture)
+Art::Art(SDL_Texture* texture) : 
+	texture(texture)
 {
 }
 
@@ -10,8 +11,9 @@ Art::~Art(void)
 	TextureManager::destroy(texture);
 }
 
-Victory::Victory(SDL_Renderer* renderer) : human(TextureManager::load("Assets/Human/Icons/Victory.png", renderer)), orc(TextureManager::load("Assets/Orc/Icons/Victory.png", renderer)),
-										   faction(Faction::NEUTRAL), renderer(renderer), destination({ 7 * SCALE, 5 * SCALE , 11 * SCALE, 9 * SCALE })
+Victory::Victory(SDL_Renderer* renderer) : 
+	human(TextureManager::load("Assets/Human/Icons/Victory.png", renderer)), faction(Faction::NEUTRAL), renderer(renderer),
+	orc(TextureManager::load("Assets/Orc/Icons/Victory.png", renderer)), destination({ 7 * SCALE, 5 * SCALE , 11 * SCALE, 9 * SCALE })
 {
 }
 

@@ -1,12 +1,14 @@
 #include "Combat0.h"
 
-Combat0::Combat0(SDL_Renderer* renderer, TileInfo* tile) : animation(&this->tile, renderer), highlight(&this->tile, &remember, renderer), movement(&this->tile, &remember), unit(&this->tile, renderer), engaged(Engage::NO)
+Combat0::Combat0(SDL_Renderer* renderer, TileInfo* tile) : 
+	animation(&this->tile, renderer), highlight(&this->tile, &remember, renderer), 
+	movement(&this->tile, &remember), unit(&this->tile, renderer), engaged(Engage::NO)
 {
 	if (tile != nullptr)
 	{
-		for (Uint8 row = 0; row < ROW; ++row)
+		for (size_t row = 0; row < ROW; ++row)
 		{
-			for (Uint8 column = 0; column < COLUMN; ++column)
+			for (size_t column = 0; column < COLUMN; ++column)
 			{
 				this->tile.info[row][column].state = tile->info[row][column].state;
 				this->tile.info[row][column].show = (Show)tile->info[row][column].state;
@@ -66,7 +68,6 @@ void Combat0::train(State unit)
 	{
 		spawn = { 1, 16 };
 	}
-
 	this->unit.train(unit, spawn);
 	engage(Engage::UNIT, spawn);
 }

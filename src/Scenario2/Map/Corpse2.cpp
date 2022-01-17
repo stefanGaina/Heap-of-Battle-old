@@ -1,7 +1,8 @@
 #include "Corpse2.h"
 #include "TextureManager.h"
 
-Corpse2::Corpse2(SDL_Renderer* renderer) : Corpse0(renderer)
+Corpse2::Corpse2(SDL_Renderer* renderer) : 
+	Corpse0(renderer)
 {
 }
 

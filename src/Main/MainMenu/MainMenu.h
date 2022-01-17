@@ -1,11 +1,10 @@
 #pragma once
-#include "Game0.h"
 #include "SelectMap.h"
 #include "CursorMenu.h"
+#include "SoundMenu.h"
+#include "TextMenu.h"
 #include "Load.h"
-
-#include <SDL_ttf.h>
-#include <SDL_mixer.h>
+#include "Game0.h"
 
 struct Button
 {
@@ -25,17 +24,17 @@ private:
 	void start(Game0* game);
 	void resetCurrent(void);
 
-	void initializeRectangles(void);
-	void loadTextures(void);
-	void loadSounds(void);
+	void initializeRectangles(void); //
 
+	TextMenu text;
+	const SoundMenu sound;
 	CursorMenu cursor;
 
 	Load load;
 
 	Mouse mouse;
 
-	SDL_Renderer* renderer;
+	SDL_Renderer* const renderer;
 	SDL_Rect  destinationBackground, destinationLogo, destinationButton, destinationMute;
 
 	Button button;
@@ -43,9 +42,7 @@ private:
 	SDL_Texture* background, * newGame, * muteButton, * logo;
 
 	SDL_Texture* current[3];
-
-	Mix_Music* ambience;
-
+	
 	Sint8 scenario;
 
 	// bool muted;

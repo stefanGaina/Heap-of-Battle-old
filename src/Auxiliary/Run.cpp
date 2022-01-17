@@ -1,6 +1,7 @@
 #include "Run.h"
 
-Run::Run(void) : running(true)
+Run::Run(void) : 
+	running(true)
 {
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "Grid0.h"
 
-class Grid2 : public Grid0
+class Grid2 : private Grid0
 {
 public:
 	Grid2(SDL_Renderer* renderer);

@@ -1,27 +1,41 @@
 #include "Highlight.h"
 #include "TextureManager.h"
 
-Highlight::Highlight(TileInfo* tile, Coordinate* remember, SDL_Renderer* renderer) : highlight(Color::BLUE), tile(tile), remember(remember), renderer(renderer)
+HighlightTexture::HighlightTexture(SDL_Texture* highlight) :
+	highlight(highlight)
 {
-	loadTextures();
+	SDL_SetTextureBlendMode(highlight, SDL_BLENDMODE_BLEND);
+	SDL_SetTextureAlphaMod(highlight, 40);
 }
 
-Highlight::~Highlight(void)
+HighlightTexture::~HighlightTexture(void)
 {
-	destroyTextures();
+	TextureManager::destroy(highlight);
+}
+
+Highlight::Highlight(TileInfo* tile, Coordinate* remember, SDL_Renderer* renderer) : 
+	human(TextureManager::load("Assets/Human/Blue.png", renderer)), 
+	orc(TextureManager::load("Assets/Orc/Red.png", renderer)),
+	highlight(Color::BLUE), tile(tile), remember(remember), 
+	renderer(renderer), destination({ 0, 0, SCALE, SCALE })
+{
 }
 
 void Highlight::draw(Color highlight, Coordinate location)
 {
 	if (highlight == Color::BLUE)
 	{
-		TextureManager::draw(human.highlight, { location.y * SCALE, location.x * SCALE, SCALE, SCALE }, renderer);
+		destination.x = location.y * SCALE;
+		destination.y = location.x * SCALE;
+		TextureManager::draw(human.highlight, destination, renderer);
 	}
 	else
 	{
 		if (highlight == Color::RED)
 		{
-			TextureManager::draw(orc.highlight, { location.y * SCALE, location.x * SCALE, SCALE, SCALE }, renderer);
+			destination.x = location.y * SCALE;
+			destination.y = location.x * SCALE;
+			TextureManager::draw(orc.highlight, destination, renderer);
 		}
 	}
 }
@@ -115,14 +129,12 @@ void Highlight::path(Coordinate current, Uint8 actions, Uint8 distance)
 
 void Highlight::reset(Uint8 x, Uint8 y, Uint8 actions)
 {
-	Uint8 row, column, maxRow, maxColumn;
-
 	//maxRow = (x + actions) < ROW ? (x + actions) : ROW - 1;
 	//maxColumn = (y + actions) < COLUMN ? (x + actions) : COLUMN - 1;
 
-	for (row = 0; row < ROW; ++row)
+	for (size_t row = 0; row < ROW; ++row)
 	{
-		for (column = 0; column < COLUMN; ++column)
+		for (size_t column = 0; column < COLUMN; ++column)
 		{
 			tile->info[row][column].highlight = Color::UNHIGHLIGHT;
 			tile->info[row][column].distance = 10;
@@ -177,21 +189,4 @@ bool Highlight::canAttack(State attacker, State defender)
 bool Highlight::validMovement(Color highlight)
 {
 	return this->highlight == highlight;
-}
-
-void Highlight::loadTextures(void)
-{
-	human.highlight = TextureManager::load("Assets/Human/Blue.png", renderer);
-	SDL_SetTextureBlendMode(human.highlight, SDL_BLENDMODE_BLEND);
-	SDL_SetTextureAlphaMod(human.highlight, 40);
-
-	orc.highlight = TextureManager::load("Assets/Orc/Red.png", renderer);
-	SDL_SetTextureBlendMode(orc.highlight, SDL_BLENDMODE_BLEND);
-	SDL_SetTextureAlphaMod(orc.highlight, 40);
-}
-
-void Highlight::destroyTextures(void)
-{
-	TextureManager::destroy(human.highlight);
-	TextureManager::destroy(orc.highlight);
 }

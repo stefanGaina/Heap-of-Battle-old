@@ -16,9 +16,6 @@ public:
 	Save save;
 
 private:
-	void loadTextures(void);
-	void destroyTextures(void);
-
 	SDL_Renderer* renderer;
 
 	SDL_Texture* background, * parchment;

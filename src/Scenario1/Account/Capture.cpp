@@ -11,5 +11,5 @@ Faction Capture::get(void)
 
 void Capture::update(Faction capture)
 {
-	captured = capture != Faction::NEUTRAL ? capture : captured;
+	captured = capture == Faction::NEUTRAL ? captured : capture;
 }

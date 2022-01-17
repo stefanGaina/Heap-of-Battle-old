@@ -1,5 +1,5 @@
-#include "Scenario2\Map\Tile2.h"
-#include "Auxiliary\TextureManager.h"
+#include "Tile2.h"
+#include "TextureManager.h"
 
 enum Tiles
 {
@@ -39,7 +39,8 @@ static Uint8 currentMap[ROW - 2][COLUMN - 8] =
 	{S0  , S0  , S0  , S0  , S0  , S0  , S0  , S0  , S0  , S0  , S0  , S0  , S0  , S0  , S0  , S0  , S0}
 };
 
-Tile2::Tile2(SDL_Renderer* renderer) : Tile0(renderer)
+Tile2::Tile2(SDL_Renderer* renderer) : 
+	Tile0(renderer)
 {
 	loadTextures();
 }
@@ -51,9 +52,9 @@ Tile2::~Tile2(void)
 
 void Tile2::draw(void)
 {
-	for (Uint8 row = 0; row < ROW - 2; ++row)
+	for (size_t row = 0; row < ROW - 2; ++row)
 	{
-		for (Uint8 column = 0; column < COLUMN - 8; ++column)
+		for (size_t column = 0; column < COLUMN - 8; ++column)
 		{
 			destination.x = (column + 4) * SCALE;
 			destination.y = (row + 1) * SCALE;

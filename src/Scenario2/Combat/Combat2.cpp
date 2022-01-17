@@ -22,11 +22,11 @@ void Combat2::initializeInfo(void)
 	{
 		for (column = 4; column < 7; ++column)
 		{
-			tile.info[row][column].state = State::HUMAN_BARRACK;
-			tile.info[row + 8][column].state = State::HUMAN_BARRACK;
+			tile.info[row][column].state = State::HUMAN_KEEP_1;
+			tile.info[row + 8][column].state = State::HUMAN_KEEP_2;
 
-			tile.info[row][column + 14].state = State::ORC_BARRACK;
-			tile.info[row + 8][column + 14].state = State::ORC_BARRACK;
+			tile.info[row][column + 14].state = State::ORC_KEEP_1;
+			tile.info[row + 8][column + 14].state = State::ORC_KEEP_2;
 		}
 	}
 	for (row = 7; row < 12; ++row)

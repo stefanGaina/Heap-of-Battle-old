@@ -1,6 +1,7 @@
 #include "Map2.h"
 
-Map2::Map2(SDL_Renderer* renderer) : Map0(renderer), tile(renderer), building(renderer), corpse(renderer), grid(renderer)
+Map2::Map2(SDL_Renderer* renderer) : 
+	Map0(renderer), tile(renderer), building(renderer), corpse(renderer), grid(renderer)
 {
 }
 

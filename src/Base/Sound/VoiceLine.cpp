@@ -405,7 +405,7 @@ void VoiceLine::destroySounds(void)
 	Mix_FreeChunk(orc.wing.train);
 	orc.wing.train = nullptr;
 
-	for (Uint8 i = 0; i < 4; ++i)
+	for (size_t i = 0; i < 4; ++i)
 	{
 		Mix_FreeChunk(human.infantry.select[i]);
 		human.infantry.select[i] = nullptr;
@@ -455,7 +455,7 @@ void VoiceLine::destroySounds(void)
 		Mix_FreeChunk(orc.wing.move[i]);
 		orc.wing.move[i] = nullptr;
 	}
-	for (Uint8 i = 0; i < 3; ++i)
+	for (size_t i = 0; i < 3; ++i)
 	{
 		Mix_FreeChunk(human.infantry.attack[i]);
 		human.infantry.attack[i] = nullptr;

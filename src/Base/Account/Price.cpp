@@ -2,11 +2,11 @@
 
 Price::Price(PriceValue lastPrice)
 {
-	price[0] = PriceValue::empty;
-	price[1] = PriceValue::infantry;
-	price[2] = PriceValue::archer;
-	price[3] = PriceValue::knight;
-	price[4] = PriceValue::wing;
+	price[0] = PriceValue::EMPTY;
+	price[1] = PriceValue::INFANTRY;
+	price[2] = PriceValue::ARCHER;
+	price[3] = PriceValue::KNIGHT;
+	price[4] = PriceValue::WING;
 	price[5] = lastPrice;
 }
 
