@@ -14,8 +14,9 @@ enum Action
 
 struct Figure
 {
+	Coordinate spawn; // TO DO
+
 	SDL_Texture* infantry, * archer, * knight, * wing;
-	Coordinate spawn;
 };
 
 class Unit

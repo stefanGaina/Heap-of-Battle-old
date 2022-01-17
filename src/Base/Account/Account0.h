@@ -8,7 +8,7 @@ struct Income0
 	Income0(Receipt receipt);
 
 	Receipt get(void);
-
+	
 	Finance gold, yield;
 };
 

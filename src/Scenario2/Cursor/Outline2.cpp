@@ -1,6 +1,7 @@
 #include "Outline2.h"
 
-Outline2::Outline2(SDL_Renderer* renderer) : Outline0(renderer)
+Outline2::Outline2(SDL_Renderer* renderer) : 
+	Outline0(renderer)
 {
 }
 

@@ -1,7 +1,8 @@
 #include "Unit.h"
 #include "TextureManager.h"
 
-Unit::Unit(TileInfo* tile, SDL_Renderer* renderer) : tile(tile), renderer(renderer), destination({ 0, 0, SCALE, SCALE })
+Unit::Unit(TileInfo* tile, SDL_Renderer* renderer) : 
+	tile(tile), renderer(renderer), destination({ 0, 0, SCALE, SCALE })
 {
 	human.spawn.x = 17;
 	human.spawn.y = 8;
@@ -34,42 +35,42 @@ void Unit::draw(Coordinate location)
 	}
 	switch (tile->info[location.x][location.y].show)
 	{
-		case Show::human_infantry:
+		case Show::HUMAN_INFANTRY:
 		{
 			TextureManager::draw(human.infantry, destination, renderer);
 			break;
 		}
-		case Show::human_archer:
+		case Show::HUMAN_ARCHER:
 		{
 			TextureManager::draw(human.archer, destination, renderer);
 			break;
 		}
-		case Show::human_knight:
+		case Show::HUMAN_KNIGHT:
 		{
 			TextureManager::draw(human.knight, destination, renderer);
 			break;
 		}
-		case Show::human_wing:
+		case Show::HUMAN_WING:
 		{
 			TextureManager::draw(human.wing, destination, renderer);
 			break;
 		}
-		case Show::orc_infantry:
+		case Show::ORC_INFANTRY:
 		{
 			TextureManager::draw(orc.infantry, destination, renderer);
 			break;
 		}
-		case Show::orc_archer:
+		case Show::ORC_ARCHER:
 		{
 			TextureManager::draw(orc.archer, destination, renderer);
 			break;
 		}
-		case Show::orc_knight:
+		case Show::ORC_KNIGHT:
 		{
 			TextureManager::draw(orc.knight, destination, renderer);
 			break;
 		}
-		case Show::orc_wing:
+		case Show::ORC_WING:
 		{
 			TextureManager::draw(orc.wing, destination, renderer);
 		}

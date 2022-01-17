@@ -1,12 +1,14 @@
 #include "Animation.h"
 #include "TextureManager.h"
 
-enum
+enum AnimationSpeed
 {
 	ANIMATION_SPEED = 2, // 1 - slow, 2 - fast
 };
 
-Animation::Animation(TileInfo* tile, SDL_Renderer* renderer) : AnimationTexture(renderer), tile(tile), distance(-1), animating(false), destination({ 0, 0, SCALE, SCALE + 8 })
+Animation::Animation(TileInfo* tile, SDL_Renderer* renderer) : 
+	AnimationTexture(renderer), tile(tile), distance(-1), 
+	animating(false), destination({ 0, 0, SCALE, SCALE + 8 })
 {
 }
 
@@ -50,7 +52,6 @@ void Animation::draw(void)
 				}
 			}
 		}
-
 		switch (current.path[distance])
 		{
 			case Move::LEFT:
@@ -90,7 +91,7 @@ void Animation::draw(void)
 				changeFrameAttack += TIMER;
 				toAnimate = unit->leftAttack[Uint8(changeFrameAttack) % ANIMATION_FRAMES];
 
-				tile->info[current.finish.x][current.finish.y].show = Show::nothing;
+				tile->info[current.finish.x][current.finish.y].show = Show::NOTHING;
 				TextureManager::draw(death[Uint8(changeFrameAttack) % ANIMATION_FRAMES], { destination.x - SCALE, destination.y , destination.w , destination.h }, renderer);
 				break;
 			}
@@ -99,7 +100,7 @@ void Animation::draw(void)
 				changeFrameAttack += TIMER;
 				toAnimate = unit->upAttack[Uint8(changeFrameAttack) % ANIMATION_FRAMES];
 
-				tile->info[current.finish.x][current.finish.y].show = Show::nothing;
+				tile->info[current.finish.x][current.finish.y].show = Show::NOTHING;
 				TextureManager::draw(death[Uint8(changeFrameAttack) % ANIMATION_FRAMES], { destination.x, destination.y - SCALE, destination.w , destination.h }, renderer);
 				break;
 			}
@@ -108,7 +109,7 @@ void Animation::draw(void)
 				changeFrameAttack += TIMER;
 				toAnimate = unit->rightAttack[Uint8(changeFrameAttack) % ANIMATION_FRAMES];
 
-				tile->info[current.finish.x][current.finish.y].show = Show::nothing;
+				tile->info[current.finish.x][current.finish.y].show = Show::NOTHING;
 				TextureManager::draw(death[Uint8(changeFrameAttack) % ANIMATION_FRAMES], { destination.x + SCALE, destination.y, destination.w , destination.h }, renderer);
 				break;
 			}
@@ -117,7 +118,7 @@ void Animation::draw(void)
 				changeFrameAttack += TIMER;
 				toAnimate = unit->downAttack[Uint8(changeFrameAttack) % ANIMATION_FRAMES];
 
-				tile->info[current.finish.x][current.finish.y].show = Show::nothing;
+				tile->info[current.finish.x][current.finish.y].show = Show::NOTHING;
 				TextureManager::draw(death[Uint8(changeFrameAttack) % ANIMATION_FRAMES], { destination.x, destination.y + SCALE, destination.w , destination.h }, renderer);
 				break;
 			}
@@ -146,7 +147,7 @@ void Animation::set(Queue* queue)
 		destination.y = current.start.x * SCALE;
 
 		animating = true;
-		tile->info[current.start.x][current.start.y].show = Show::nothing;
+		tile->info[current.start.x][current.start.y].show = Show::NOTHING;
 
 		unit = setAttacker(current.unit);
 		death = setDefender(tile->info[current.finish.x][current.finish.y].show);

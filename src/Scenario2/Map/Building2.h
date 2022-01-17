@@ -12,7 +12,7 @@ struct Mine
 	SDL_Texture* active, * passive, * current;
 };
 
-class Building2 : public Building0
+class Building2 : private Building0
 {
 public:
 	Building2(SDL_Renderer* renderer);

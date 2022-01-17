@@ -21,7 +21,7 @@ private:
 	void checkVictory(void);
 
 	void humanNo(State state, Coordinate click = { 0,0 });
-	bool humanBuilding(State state);
+	bool humanKeep1(State state);
 
 	void orcNo(State state, Coordinate = { 0,0 });
 	bool orcBuilding(State state);
@@ -29,14 +29,9 @@ private:
 	bool caseUnit(Coordinate click);
 
 	Account2 account;
-
 	Combat2 combat;
-
 	Map2 map;
-
 	Menu2 menu;
-
 	Sound2 sound;
-
 	Outline2 outline;
 };

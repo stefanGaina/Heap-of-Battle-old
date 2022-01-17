@@ -1,7 +1,7 @@
 #pragma once
-#include "Base\Map\Tile0.h"
+#include "Tile0.h"
 
-class Tile2 : public Tile0
+class Tile2 : private Tile0
 {
 public:
 	Tile2(SDL_Renderer* renderer);

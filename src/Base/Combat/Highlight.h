@@ -3,6 +3,9 @@
 
 struct HighlightTexture
 {
+	HighlightTexture(SDL_Texture* highlight);
+	~HighlightTexture(void);
+
 	SDL_Texture* highlight;
 };
 
@@ -10,7 +13,6 @@ class Highlight
 {
 public:
 	Highlight(TileInfo* tile, Coordinate* remember, SDL_Renderer* renderer);
-	~Highlight(void);
 
 	void draw(Color highlight, Coordinate location);
 	void set(Color highlight);
@@ -22,10 +24,8 @@ public:
 	bool canAttack(State attacker, State defender);
 	
 private:
-	void loadTextures(void);
-	void destroyTextures(void);
-
 	SDL_Renderer* renderer;
+	SDL_Rect destination;
 
 	TileInfo* tile;
 	Coordinate* remember;

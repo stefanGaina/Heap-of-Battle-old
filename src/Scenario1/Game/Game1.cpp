@@ -250,7 +250,7 @@ void Game1::passTurn(void)
 
 	combat.unit.boostSpawns();
 	combat.boostFarms();
-	combat.boostTowers({ account.human.farm.get(), account.orc.farm.get() });
+	combat.boostTowers({ account.human.tower.get(), account.orc.tower.get() });
 
 	menu.set();
 
@@ -267,19 +267,16 @@ void Game1::humanNo(State state, Coordinate click)
 		combat.engage(Engage::KEEP);
 		menu.set(State::HUMAN_KEEP, 0, 0, account.human.vamp.get());
 	}
+	else if (state >= State::HUMAN_INFANTRY && state <= State::HUMAN_WING)
+	{
+		sound.voiceLine.play(state, Sound::SELECT);
+		combat.engage(Engage::UNIT, click);
+		menu.set(state, combat.getActions(click), combat.getAttacked(click));
+	}
 	else
 	{
-		if (state >= State::HUMAN_INFANTRY && state <= State::HUMAN_WING)
-		{
-			sound.voiceLine.play(state, Sound::SELECT);
-			combat.engage(Engage::UNIT, click);
-			menu.set(state, combat.getActions(click), combat.getAttacked(click));
-		}
-		else
-		{
-			combat.engage();
-			menu.set();
-		}
+		combat.engage();
+		state >= State::HUMAN_ALTAR && state <= State::HUMAN_TOWER ? menu.set(state) : menu.set();
 	}
 }
 
@@ -307,33 +304,30 @@ bool Game1::humanBuilding(State state)
 			sound.soundEffect.play(Sound::ERROR);
 		}
 	}
-	else
+	else if (state == State::VAMP_HUMAN_KEEP)
 	{
-		if (state == State::VAMP_HUMAN_KEEP)
+		if (account.human.vamp.get())
 		{
-			if (account.human.vamp.get())
-			{
-				sound.soundEffect.play(Sound::ERROR);
-			}
-			else
-			{
-				if (account.canAfford(State::HUMAN_KEEP))
-				{
-					map.building.vampHumanKeep();
-					account.vamp(Faction::HUMAN);
-					sound.soundEffect.play(Sound::VAMP);
-					menu.set(State::HUMAN_KEEP, 0, 0, true);
-				}
-				else
-				{
-					sound.soundEffect.play(Sound::HUMAN_MORE_GOLD);
-				}
-			}
+			sound.soundEffect.play(Sound::ERROR);
 		}
 		else
 		{
-			return false;
+			if (account.canAfford(State::HUMAN_KEEP))
+			{
+				map.building.vampHumanKeep();
+				account.vamp(Faction::HUMAN);
+				sound.soundEffect.play(Sound::VAMP);
+				menu.set(State::HUMAN_KEEP, 0, 0, true);
+			}
+			else
+			{
+				sound.soundEffect.play(Sound::HUMAN_MORE_GOLD);
+			}
 		}
+	}
+	else
+	{
+		return false;
 	}
 	return true;
 }
@@ -345,19 +339,16 @@ void Game1::orcNo(State state, Coordinate click)
 		combat.engage(Engage::KEEP);
 		menu.set(State::ORC_KEEP, 0, 0, account.orc.vamp.get());
 	}
+	else if (state >= State::ORC_WING && state <= State::ORC_INFANTRY)
+	{
+		sound.voiceLine.play(state, Sound::SELECT);
+		combat.engage(Engage::UNIT, click);
+		menu.set(state, combat.getActions(click), combat.getAttacked(click));
+	}
 	else
 	{
-		if (state >= State::ORC_WING && state <= State::ORC_INFANTRY)
-		{
-			sound.voiceLine.play(state, Sound::SELECT);
-			combat.engage(Engage::UNIT, click);
-			menu.set(state, combat.getActions(click), combat.getAttacked(click));
-		}
-		else
-		{
-			combat.engage();
-			menu.set();
-		}
+		combat.engage();
+		state >= State::ORC_TOWER && state <= State::ORC_ALTAR ? menu.set(state) : menu.set();
 	}
 }
 
@@ -385,33 +376,30 @@ bool Game1::orcBuilding(State state)
 			sound.soundEffect.play(Sound::ERROR);
 		}
 	}
-	else
+	else if (state == State::VAMP_ORC_KEEP)
 	{
-		if (state == State::VAMP_ORC_KEEP)
+		if (account.orc.vamp.get())
 		{
-			if (account.orc.vamp.get())
-			{
-				sound.soundEffect.play(Sound::ERROR);
-			}
-			else
-			{
-				if (account.canAfford(State::ORC_KEEP))
-				{
-					map.building.vampOrcKeep();
-					account.vamp(Faction::ORC);
-					sound.soundEffect.play(Sound::VAMP);
-					menu.set(State::ORC_KEEP, 0, 0, true);
-				}
-				else
-				{
-					sound.soundEffect.play(Sound::ORC_MORE_GOLD);
-				}
-			}
+			sound.soundEffect.play(Sound::ERROR);
 		}
 		else
 		{
-			return false;
+			if (account.canAfford(State::ORC_KEEP))
+			{
+				map.building.vampOrcKeep();
+				account.vamp(Faction::ORC);
+				sound.soundEffect.play(Sound::VAMP);
+				menu.set(State::ORC_KEEP, 0, 0, true);
+			}
+			else
+			{
+				sound.soundEffect.play(Sound::ORC_MORE_GOLD);
+			}
 		}
+	}
+	else
+	{
+		return false;
 	}
 	return true;
 }

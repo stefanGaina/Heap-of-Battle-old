@@ -1,6 +1,7 @@
 #include "Grid2.h"
 
-Grid2::Grid2(SDL_Renderer* renderer) : Grid0(renderer)
+Grid2::Grid2(SDL_Renderer* renderer) : 
+	Grid0(renderer)
 {
 }
 
@@ -82,7 +83,7 @@ void Grid2::verticalBlack(void)
 
 void Grid2::horizontalGray(void)
 {
-	SDL_SetRenderDrawColor(renderer, 0xbd, 0xb7, 0x6b, 0xfF); //
+	SDL_SetRenderDrawColor(renderer, 0xbd, 0xb7, 0x6b, 0xfF); // yellow
 
 	Uint16 row = SCALE;
 	SDL_RenderDrawLine(renderer, 9 * SCALE, row, 16 * SCALE, row);

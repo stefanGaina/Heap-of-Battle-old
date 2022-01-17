@@ -7,7 +7,17 @@ public:
 	Frame(SDL_Renderer* renderer);
 	~Frame(void);
 
-	void draw(Faction turn, State type, bool hasAttacked);
+	void humanAlways(void);
+	void orcAlways(void);
+
+	void humanStandard(void);
+	void orcStandard(void);
+
+	void humanKeep(void);
+	void orcKeep(void);
+
+	void humanAttack(bool hasAttacked);
+	void orcAttack(bool hasAttacked);
 
 private:
 	SDL_Renderer* renderer;

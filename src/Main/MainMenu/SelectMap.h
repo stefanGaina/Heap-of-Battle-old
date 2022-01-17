@@ -1,7 +1,7 @@
 #pragma once
 #include "Run.h"
 #include "CursorMenu.h"
-#include "Language.h"
+#include "SoundMenu.h"
 
 enum class SelectEngage
 {
@@ -33,11 +33,11 @@ struct SelectIcon
 class SelectMap : public Run
 {
 public:
-	SelectMap(CursorMenu* cursor, const Mouse& mouse, SDL_Renderer* renderer);
+	SelectMap(CursorMenu* cursor, const SoundMenu& sound, const Mouse& mouse, SDL_Renderer* renderer);
 	~SelectMap(void);
 
-	void handleEvents(void);
 	void render(void);
+	void handleEvents(void);
 
 	Sint8 code(void);
 
@@ -45,6 +45,7 @@ private:
 	void resetCurrent(void);
 
 	CursorMenu* cursor;
+	const SoundMenu& sound;
 
 	Mouse mouse;
 

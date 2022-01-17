@@ -13,7 +13,7 @@ SelectIcon::~SelectIcon(void)
 	TextureManager::destroy(start);
 }
 
-SelectMap::SelectMap(CursorMenu* cursor, const Mouse& mouse, SDL_Renderer* renderer) :
+SelectMap::SelectMap(CursorMenu* cursor, const SoundMenu& sound, const Mouse& mouse, SDL_Renderer* renderer) :
 	idle(TextureManager::load("Assets/General/Menu/Select Scenario/Scenario Icon Idle.png", renderer),
 		TextureManager::load("Assets/General/Menu/Select Scenario/Tutorial Icon Idle.png", renderer),
 		TextureManager::load("Assets/General/Menu/Select Scenario/Start Icon Idle.png", renderer)),
@@ -21,7 +21,7 @@ SelectMap::SelectMap(CursorMenu* cursor, const Mouse& mouse, SDL_Renderer* rende
 		TextureManager::load("Assets/General/Menu/Select Scenario/Tutorial Icon Selected.png", renderer),
 		TextureManager::load("Assets/General/Menu/Select Scenario/Start Icon Selected.png", renderer)),
 	background(TextureManager::load("Assets/General/Menu/Select Scenario/Background.png", renderer)),
-	cursor(cursor), mouse(mouse), renderer(renderer), destination({ 0, 0, SCALE, SCALE })
+	cursor(cursor), sound(sound), mouse(mouse), renderer(renderer), destination({ 0, 0, SCALE, SCALE })
 {
 	scenario[0] = TextureManager::load("Assets/General/Menu/Select Scenario/Tutorial.png", renderer);
 	scenario[1] = TextureManager::load("Assets/General/Menu/Select Scenario/Scenario1.png", renderer);
@@ -155,13 +155,27 @@ void SelectMap::handleEvents(void)
 			}
 			case SDL_MOUSEBUTTONDOWN:
 			{
+				sound.play();
+
 				if (current[4] == selected.start)
 				{
 					stop();
 				}
+				else if (current[0] == selected.tutorial)
+				{
+					engaged = SelectEngage::TUTORIAL;
+				}
 				else if (current[1] == selected.scenario)
 				{
 					engaged = SelectEngage::SCENARIO_1;
+				}
+				else if (current[2] == selected.scenario)
+				{
+					engaged = SelectEngage::SCENARIO_2;
+				}
+				else if (current[3] == selected.scenario)
+				{
+					engaged = SelectEngage::SCENARIO_3;
 				}
 				else
 				{
@@ -183,6 +197,7 @@ void SelectMap::handleEvents(void)
 			}
 			case SDL_QUIT:
 			{
+				engaged = SelectEngage::NO;
 				stop();
 				break;
 			}

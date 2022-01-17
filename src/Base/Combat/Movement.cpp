@@ -1,6 +1,7 @@
 #include "Movement.h"
 
-Movement::Movement(TileInfo* tile, Coordinate* remember) : tile(tile), remember(remember), attack(false)
+Movement::Movement(TileInfo* tile, Coordinate* remember) : 
+	tile(tile), remember(remember), attack(false)
 {
 }
 
@@ -8,11 +9,10 @@ Move* Movement::findPath(Coordinate target)
 {
 	Move* path = new Move[7];
 
-	for (Uint8 reset = 0; reset < 7; ++reset)
+	for (size_t reset = 0; reset < 7; ++reset)
 	{
 		path[reset] = Move::STOP;
 	}
-
 	Sint8 distance = tile->info[target.x][target.y].distance - 1;
 
 	if (tile->info[target.x][target.y].state != State::NEUTRAL) // if it's an attack
@@ -47,7 +47,6 @@ Move* Movement::findPath(Coordinate target)
 			}
 		}
 	}
-
 	for (; distance >= 0; --distance)
 	{
 		if (tile->info[target.x][target.y - 1].distance == distance)

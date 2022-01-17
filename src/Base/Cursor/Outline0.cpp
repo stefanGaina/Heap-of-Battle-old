@@ -1,7 +1,8 @@
 #include "Outline0.h"
 
 Outline0::Outline0(SDL_Renderer* renderer) : 
-	Enable(true), renderer(renderer), human({ 0x15, 0x89, 0xFF, 0xAF }), orc({ 0xF7, 0x0D, 0x1A, 0xAF }), current(&human)
+	Enable(true), current(&human), renderer(renderer),
+	human({ 0x15, 0x89, 0xFF, 0xAF }), orc({ 0xF7, 0x0D, 0x1A, 0xAF })
 {
 }
 

@@ -1,10 +1,12 @@
 #include "Account1.h"
 
-Objective::Objective(Faction faction) : altar(faction), farm(faction), tower(faction)
+Objective::Objective(Faction faction) : 
+	altar(faction), farm(faction), tower(faction)
 {
 }
 
-Account1::Account1(Receipt human, Receipt orc) : Account0(human, orc), human(Faction::HUMAN), orc(Faction::ORC), bonus(Faction::NEUTRAL)
+Account1::Account1(Receipt human, Receipt orc) : 
+	Account0(human, orc), human(Faction::HUMAN), orc(Faction::ORC), bonus(Faction::NEUTRAL)
 {
 }
 

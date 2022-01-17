@@ -1,6 +1,7 @@
 #include "Enable.h"
 
-Enable::Enable(bool enabled) : enabled(enabled)
+Enable::Enable(bool enabled) 
+	: enabled(enabled)
 {
 }
 

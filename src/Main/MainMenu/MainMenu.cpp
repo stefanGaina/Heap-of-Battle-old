@@ -1,25 +1,24 @@
 #include "MainMenu.h"
 #include "Game1.h"
 #include "Game2.h"
+#include "Game3.h"
 #include "TextureManager.h"
 
 MainMenu::MainMenu(SDL_Renderer* renderer) :
-	cursor(renderer), renderer(renderer)
+	text(renderer), cursor(renderer), renderer(renderer)
 {
-	loadTextures();
-	loadSounds();
-	initializeRectangles();
+	logo = TextureManager::load("Assets/General/Menu/Main/Logo.png", renderer);
+	button.idle = TextureManager::load("Assets/General/Menu/Main/Button Idle.png", renderer);
+	button.selected = TextureManager::load("Assets/General/Menu/Main/Button Selected.png", renderer);
+	muteButton = TextureManager::load("Assets/General/Menu/Main/Mute Button/Mute OFF Idle.png", renderer);
+	background = TextureManager::load("Assets/General/Menu/Main/Menu Background.png", renderer);
 
-	Mix_PlayMusic(ambience, -1);
-
+	initializeRectangles(); //
 	resetCurrent();
 }
 
 MainMenu::~MainMenu(void)
 {
-	Mix_FreeMusic(ambience);
-	ambience = nullptr;
-
 	TextureManager::destroy(logo);
 	TextureManager::destroy(background);
 }
@@ -42,6 +41,8 @@ void MainMenu::render()
 	TextureManager::draw(current[2], destinationButton, renderer);
 
 	TextureManager::draw(muteButton, destinationMute, renderer);
+
+	text.draw();
 
 	cursor.draw(mouse);
 
@@ -87,9 +88,11 @@ void MainMenu::handleEvents()
 			}
 			case SDL_MOUSEBUTTONDOWN:
 			{
+				sound.play();
+
 				if (current[0] == button.selected)
 				{
-					SelectMap selectMap(&cursor, mouse, renderer);
+					SelectMap selectMap(&cursor, sound, mouse, renderer);
 
 					while (selectMap.isRunning())
 					{
@@ -99,27 +102,29 @@ void MainMenu::handleEvents()
 					}
 					switch (scenario)
 					{
+						case -1:
+						{
+							break;
+						}
 						case 1:
 						{
-							Game1 game(renderer, mouse);
-
-							start(&game);
+							Game1* game = new Game1(renderer, mouse);
+							start(game);
+							delete game;
 							break;
 						}
 						case 2:
 						{
-							Game2 game(renderer, mouse);
-
-							start(&game);
+							Game2* game = new Game2(renderer, mouse);
+							start(game);
+							delete game;
 							break;
 						}
 						case 3:
 						{
-							break;
-						}
-						case -1:
-						{
-
+							Game3* game = new Game3(renderer, mouse);
+							start(game);
+							delete game;
 						}
 					}
 				}
@@ -191,7 +196,7 @@ void MainMenu::start(Game0* game)
 			SDL_Delay(frame.delay - frame.time);
 		}
 	}
-	Mix_PlayMusic(ambience, -1);
+	sound.start();
 }
 
 void MainMenu::initializeRectangles(void)
@@ -215,20 +220,6 @@ void MainMenu::initializeRectangles(void)
 	destinationMute.y = 550;
 	destinationMute.w = 25;
 	destinationMute.h = 25;
-}
-
-void MainMenu::loadTextures(void)
-{
-	logo = TextureManager::load("Assets/General/Menu/Main/Logo.png", renderer);
-	button.idle = TextureManager::load("Assets/General/Menu/Main/Button Idle.png", renderer);
-	button.selected = TextureManager::load("Assets/General/Menu/Main/Button Selected.png", renderer);
-	muteButton = TextureManager::load("Assets/General/Menu/Main/Mute Button/Mute OFF Idle.png", renderer);
-	background = TextureManager::load("Assets/General/Menu/Main/Menu Background.png", renderer);
-}
-
-void MainMenu::loadSounds(void)
-{
-	ambience = Mix_LoadMUS("Assets/General/Menu/Main/Sounds/Ambience.mp3");
 }
 
 void MainMenu::resetCurrent(void)

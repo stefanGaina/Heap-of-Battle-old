@@ -1,6 +1,7 @@
 #include "Turn.h"
 
-Turn::Turn(void) : turn(1)
+Turn::Turn(void) : 
+	turn(1)
 {
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 #include "Language.h"
 
-enum
+enum AnimationFrames
 {
 	ANIMATION_FRAMES = 4,
 };

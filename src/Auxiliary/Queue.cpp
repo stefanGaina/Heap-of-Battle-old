@@ -1,6 +1,7 @@
 #include "Queue.h"
 
-Queue::Queue(void) : tail(nullptr)
+Queue::Queue(void) : 
+	tail(nullptr)
 {
 }
 

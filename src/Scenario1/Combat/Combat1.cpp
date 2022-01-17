@@ -21,7 +21,7 @@ void Combat1::checkPortals(bool finishAnimation)
 			tile.info[2][4].notSelected = tile.info[13][5].notSelected;
 
 			tile.info[13][5].state = State::NEUTRAL;
-			tile.info[13][5].show = Show::nothing;
+			tile.info[13][5].show = Show::NOTHING;
 			tile.info[13][5].notSelected = false;
 
 			if (remember.x == 13 && remember.y == 5 && tile.info[2][4].actionsLeft > 0)
@@ -40,7 +40,7 @@ void Combat1::checkPortals(bool finishAnimation)
 			tile.info[16][20].notSelected = tile.info[5][19].notSelected;
 
 			tile.info[5][19].state = State::NEUTRAL;
-			tile.info[5][19].show = Show::nothing;
+			tile.info[5][19].show = Show::NOTHING;
 			tile.info[5][19].notSelected = false;
 
 			if (remember.x == 5 && remember.y == 19 && tile.info[16][20].actionsLeft > 0)
