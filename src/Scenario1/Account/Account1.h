@@ -14,7 +14,7 @@ struct Objective
 class Account1: public Account0
 {
 public:
-	Account1(Receipt human, Receipt orc);
+	Account1(Receipt human, Receipt orc, Uint8 turn);
 	
 	void altars(Flag flag);
 	void farms(Flag flag);

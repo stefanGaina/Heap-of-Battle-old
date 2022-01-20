@@ -1,11 +1,7 @@
 #include "Game1.h"
 
-//Game1::Game1(SDL_Renderer* renderer) : Game0(renderer), account({ 5, 15 }, { 0, 15 }), combat(renderer), map(renderer), menu(renderer), outline(renderer)
-//{
-//}
-
-Game1::Game1(SDL_Renderer* renderer, const Mouse& mouse, TileInfo* tile, Receipt human, Receipt orc) : 
-	Game0(renderer, mouse), account(human, orc), combat(renderer, tile), 
+Game1::Game1(SDL_Renderer* renderer, const Mouse& mouse, TileInfo* tile, Receipt human, Receipt orc, Uint8 turn) : 
+	Game0(renderer, mouse), account(human, orc, turn), combat(renderer, tile), 
 	map(renderer), menu(renderer), outline(renderer)
 {
 }
@@ -199,7 +195,7 @@ void Game1::handleEvents(void)
 					{
 						if (combat.getEngaged() == Engage::PAUSE)
 						{
-							pause.save.write(combat.getTileInfo(), account.income.human.get(), account.income.orc.get(), account.turn.get(), '1');
+							pause.save.write(combat.getTileInfo(), account.income.human.get(), account.income.orc.get(), account.turn.getValue(), '1');
 						}
 						break;
 					}
@@ -248,7 +244,7 @@ void Game1::passTurn(void)
 	combat.refresh(account.turn.get());
 	combat.highlight.set((Color)account.turn.get());
 
-	combat.unit.boostSpawns();
+	combat.boostSpawns();
 	combat.boostFarms();
 	combat.boostTowers({ account.human.tower.get(), account.orc.tower.get() });
 
@@ -284,7 +280,7 @@ bool Game1::humanBuilding(State state)
 {
 	if (state >= State::TRAIN_HUMAN_INFANTRY && state <= State::TRAIN_HUMAN_WING)
 	{
-		if (combat.unit.humanSpawnAvailable())
+		if (combat.human.spawnAvailable())
 		{
 			state = (State)((Uint8)state - 10); // conversion from train_unit to unit
 
@@ -356,7 +352,7 @@ bool Game1::orcBuilding(State state)
 {
 	if (state >= State::TRAIN_ORC_WING && state <= State::TRAIN_ORC_INFANTRY)
 	{
-		if (combat.unit.orcSpawnAvailable())
+		if (combat.orc.spawnAvailable())
 		{
 			state = (State)((Sint8)state + 10);
 
@@ -457,14 +453,6 @@ void Game1::updateTowers(void)
 
 void Game1::checkVictory(void)
 {
-	if (combat.getState({ 1, 16 }) >= State::HUMAN_INFANTRY)
-	{
-		pauseGame();
-		combat.engage(Engage::VICTORY);
-		pause.victory.set(Faction::HUMAN);
-		map.building.victory(Faction::HUMAN);
-		sound.soundEffect.play(Sound::ORC_DEFEAT);
-	}
 	if (combat.getState({ 17, 8 }) <= State::ORC_INFANTRY)
 	{
 		pauseGame();
@@ -472,5 +460,13 @@ void Game1::checkVictory(void)
 		pause.victory.set(Faction::ORC);
 		map.building.victory(Faction::ORC);
 		sound.soundEffect.play(Sound::HUMAN_DEFEAT);
+	}
+	if (combat.getState({ 1, 16 }) >= State::HUMAN_INFANTRY)
+	{
+		pauseGame();
+		combat.engage(Engage::VICTORY);
+		pause.victory.set(Faction::HUMAN);
+		map.building.victory(Faction::HUMAN);
+		sound.soundEffect.play(Sound::ORC_DEFEAT);
 	}
 }

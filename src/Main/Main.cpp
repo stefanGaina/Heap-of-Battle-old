@@ -1,5 +1,5 @@
-#include "SDL/InitSDL.h"
-#include "MainMenu/MainMenu.h"
+#include "InitSDL.h"
+#include "MainMenu.h"
 
 int main(int argc, char* argv[])
 {

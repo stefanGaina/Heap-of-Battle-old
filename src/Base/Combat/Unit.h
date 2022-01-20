@@ -14,8 +14,6 @@ enum Action
 
 struct Figure
 {
-	Coordinate spawn; // TO DO
-
 	SDL_Texture* infantry, * archer, * knight, * wing;
 };
 
@@ -27,11 +25,7 @@ public:
 
 	void draw(Coordinate location);
 	void refresh(Faction turn);
-	void train(State unit, Coordinate spawn);
-
-	void boostSpawns(void);
-	bool humanSpawnAvailable(void);
-	bool orcSpawnAvailable(void);
+	void train(State unit, const Coordinate& spawn);
 
 	Uint8 getAction(Uint8 index);
 

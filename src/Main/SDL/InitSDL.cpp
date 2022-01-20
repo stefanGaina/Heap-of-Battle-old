@@ -7,11 +7,19 @@
 
 InitSDL::InitSDL(const char* title, Uint32 xPosition, Uint32 yPosition, Uint16 screenWidth, Uint16 screenHeight, bool isFullscreen)
 {
+	Uint32 flag = isFullscreen ? SDL_WINDOW_FULLSCREEN : 0;
+
 	window = nullptr;
 	renderer = nullptr;
-
-	Uint8 flag = isFullscreen ? SDL_WINDOW_FULLSCREEN : 0;
 	
+	window = SDL_CreateWindow(title, xPosition, yPosition, screenWidth, screenHeight, flag);
+
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF); // white
+
+	SDL_ShowCursor(SDL_DISABLE);
+#ifdef DEBUG
 	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		ERROR(SDL_GetError());
@@ -24,21 +32,19 @@ InitSDL::InitSDL(const char* title, Uint32 xPosition, Uint32 yPosition, Uint16 s
 	{
 		ERROR(SDL_GetError());
 	}
-	window = SDL_CreateWindow(title, xPosition, yPosition, screenWidth, screenHeight, flag);
-
 	if (window == nullptr)
 	{
 		ERROR(SDL_GetError());
 	}
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
-	SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF); // white
-
 	if (renderer == nullptr)
 	{
 		ERROR(SDL_GetError());
 	}
-	SDL_ShowCursor(SDL_DISABLE);
+#else
+	SDL_Init(SDL_INIT_EVERYTHING);
+	TTF_Init();
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
+#endif
 }
 
 InitSDL::~InitSDL(void)

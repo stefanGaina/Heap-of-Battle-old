@@ -1,7 +1,7 @@
 #pragma once
 #include "Building0.h"
 
-struct plm
+struct foo
 {
 	SDL_Texture* barrack;
 	SDL_Texture* factory;
@@ -31,5 +31,5 @@ private:
 
 	Mine mine;
 
-	plm human, orc;
+	foo human, orc;
 };

@@ -4,9 +4,9 @@
 class Turn
 {
 public:
-	Turn(void);
+	Turn(Uint16 turn);
 
-	Uint8 getValue(void);
+	Uint16 getValue(void);
 	Faction get(void);
 
 	bool isHuman(void);
@@ -15,5 +15,5 @@ public:
 	void change(void);
 
 private:
-	Uint8 turn;
+	Uint16 turn;
 };

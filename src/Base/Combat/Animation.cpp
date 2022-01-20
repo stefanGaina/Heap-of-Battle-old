@@ -24,8 +24,7 @@ void Animation::draw(void)
 		{
 			++distance;
 		}
-		
-		if (Uint8(changeFrameAttack) == ANIMATION_FRAMES)
+		if (int(changeFrameAttack) == ANIMATION_FRAMES)
 		{
 			changeFrameAttack = 0;
 
@@ -57,7 +56,7 @@ void Animation::draw(void)
 			case Move::LEFT:
 			{
 				changeFrame += TIMER; // 6 frames then change it
-				toAnimate = unit->left[Uint8(changeFrame) % ANIMATION_FRAMES];
+				toAnimate = unit->left[int(changeFrame) % ANIMATION_FRAMES];
 
 				destination.x -= ANIMATION_SPEED;
 				break;
@@ -65,7 +64,7 @@ void Animation::draw(void)
 			case Move::UP:
 			{
 				changeFrame += TIMER;
-				toAnimate = unit->up[Uint8(changeFrame) % ANIMATION_FRAMES];
+				toAnimate = unit->up[int(changeFrame) % ANIMATION_FRAMES];
 
 				destination.y -= ANIMATION_SPEED;
 				break;
@@ -73,7 +72,7 @@ void Animation::draw(void)
 			case Move::RIGHT:
 			{
 				changeFrame += TIMER;
-				toAnimate = unit->right[Uint8(changeFrame) % ANIMATION_FRAMES];
+				toAnimate = unit->right[int(changeFrame) % ANIMATION_FRAMES];
 
 				destination.x += ANIMATION_SPEED;
 				break;
@@ -81,7 +80,7 @@ void Animation::draw(void)
 			case Move::DOWN:
 			{
 				changeFrame += TIMER;
-				toAnimate = unit->down[Uint8(changeFrame) % ANIMATION_FRAMES];
+				toAnimate = unit->down[int(changeFrame) % ANIMATION_FRAMES];
 
 				destination.y += ANIMATION_SPEED;
 				break;
@@ -89,37 +88,37 @@ void Animation::draw(void)
 			case Move::ATTACK_LEFT:
 			{
 				changeFrameAttack += TIMER;
-				toAnimate = unit->leftAttack[Uint8(changeFrameAttack) % ANIMATION_FRAMES];
+				toAnimate = unit->leftAttack[int(changeFrameAttack) % ANIMATION_FRAMES];
 
 				tile->info[current.finish.x][current.finish.y].show = Show::NOTHING;
-				TextureManager::draw(death[Uint8(changeFrameAttack) % ANIMATION_FRAMES], { destination.x - SCALE, destination.y , destination.w , destination.h }, renderer);
+				TextureManager::draw(death[int(changeFrameAttack) % ANIMATION_FRAMES], { destination.x - SCALE, destination.y , destination.w , destination.h }, renderer);
 				break;
 			}
 			case Move::ATTACK_UP:
 			{
 				changeFrameAttack += TIMER;
-				toAnimate = unit->upAttack[Uint8(changeFrameAttack) % ANIMATION_FRAMES];
+				toAnimate = unit->upAttack[int(changeFrameAttack) % ANIMATION_FRAMES];
 
 				tile->info[current.finish.x][current.finish.y].show = Show::NOTHING;
-				TextureManager::draw(death[Uint8(changeFrameAttack) % ANIMATION_FRAMES], { destination.x, destination.y - SCALE, destination.w , destination.h }, renderer);
+				TextureManager::draw(death[int(changeFrameAttack) % ANIMATION_FRAMES], { destination.x, destination.y - SCALE, destination.w , destination.h }, renderer);
 				break;
 			}
 			case Move::ATTACK_RIGHT:
 			{
 				changeFrameAttack += TIMER;
-				toAnimate = unit->rightAttack[Uint8(changeFrameAttack) % ANIMATION_FRAMES];
+				toAnimate = unit->rightAttack[int(changeFrameAttack) % ANIMATION_FRAMES];
 
 				tile->info[current.finish.x][current.finish.y].show = Show::NOTHING;
-				TextureManager::draw(death[Uint8(changeFrameAttack) % ANIMATION_FRAMES], { destination.x + SCALE, destination.y, destination.w , destination.h }, renderer);
+				TextureManager::draw(death[int(changeFrameAttack) % ANIMATION_FRAMES], { destination.x + SCALE, destination.y, destination.w , destination.h }, renderer);
 				break;
 			}
 			case Move::ATTACK_DOWN:
 			{
 				changeFrameAttack += TIMER;
-				toAnimate = unit->downAttack[Uint8(changeFrameAttack) % ANIMATION_FRAMES];
+				toAnimate = unit->downAttack[int(changeFrameAttack) % ANIMATION_FRAMES];
 
 				tile->info[current.finish.x][current.finish.y].show = Show::NOTHING;
-				TextureManager::draw(death[Uint8(changeFrameAttack) % ANIMATION_FRAMES], { destination.x, destination.y + SCALE, destination.w , destination.h }, renderer);
+				TextureManager::draw(death[int(changeFrameAttack) % ANIMATION_FRAMES], { destination.x, destination.y + SCALE, destination.w , destination.h }, renderer);
 				break;
 			}
 			default:

@@ -5,8 +5,8 @@ Objective::Objective(Faction faction) :
 {
 }
 
-Account1::Account1(Receipt human, Receipt orc) : 
-	Account0(human, orc), human(Faction::HUMAN), orc(Faction::ORC), bonus(Faction::NEUTRAL)
+Account1::Account1(Receipt human, Receipt orc, Uint8 turn) : 
+	Account0(human, orc, turn), human(Faction::HUMAN), orc(Faction::ORC), bonus(Faction::NEUTRAL)
 {
 }
 

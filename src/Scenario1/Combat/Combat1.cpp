@@ -1,11 +1,28 @@
 #include "Combat1.h"
 
-Combat1::Combat1(SDL_Renderer* renderer, TileInfo* tile) : Combat0(renderer, tile)
+Combat1::Combat1(SDL_Renderer* renderer, TileInfo* tile) : 
+	Combat0(renderer, tile), human({ 17, 8 }, &this->tile), orc({ 1, 16 }, &this->tile)
 {
 	if (tile == nullptr)
 	{
 		initializeInfo();
 	}
+}
+
+void Combat1::train(State unit)
+{
+	Coordinate spawn;
+	
+	if (unit > State::NEUTRAL)
+	{
+		spawn = human.get();
+	}
+	else
+	{
+		spawn = orc.get();
+	}
+	this->unit.train(unit, spawn);
+	engage(Engage::UNIT, spawn);
 }
 
 void Combat1::checkPortals(bool finishAnimation)
@@ -57,7 +74,7 @@ Faction Combat1::captureAltar(Faction point[3])
 {
 	struct { Uint8 human, orc; } counter = { 0, 0 };
 
-	for (Uint8 i = 0; i < 3; ++i)
+	for (size_t i = 0; i < 3; ++i)
 	{
 		if (point[i] == Faction::HUMAN)
 		{
@@ -93,7 +110,7 @@ Faction Combat1::captureOrcAltar(void)
 	return captureAltar(point);
 }
 
-Faction Combat1::capturePoint(Coordinate point) // 17 17 || 1 7
+Faction Combat1::capturePoint(Coordinate point)
 {
 	if (tile.info[point.x][point.y].state > State::NEUTRAL)
 	{
@@ -158,10 +175,18 @@ void Combat1::trainFarms(Uint8 turn, Flag flag)
 	}
 }
 
+void Combat1::boostSpawns(void)
+{
+	human.boostSpawn();
+	orc.boostSpawn();
+}
+
 void Combat1::boostFarms(void)
 {
-	++tile.info[1][7].actionsLeft;
-	++tile.info[17][17].actionsLeft;
+	static const Coordinate farmSpawn[2] = { {1, 7}, {17, 17} };
+
+	++tile.info[farmSpawn[0].x][farmSpawn[1].y].actionsLeft;
+	++tile.info[farmSpawn[1].x][farmSpawn[1].y].actionsLeft;
 }
 
 void Combat1::boostTowers(Flag flag)
@@ -238,23 +263,23 @@ void Combat1::initializeInfo(void)
 	tile.info[12][22].state = State::VAMP_ORC_KEEP;
 	tile.info[12][21].state = State::VAMP_ORC_KEEP;
 
-	for (Uint8 row = 14; row < 18; ++row)
+	for (size_t row = 14; row < 18; ++row)
 	{
-		for (Uint8 column = 4; column < 8; ++column)
+		for (size_t column = 4; column < 8; ++column)
 		{
 			tile.info[row][column].state = State::HUMAN_KEEP;
 			tile.info[ROW - 1 - row][COLUMN - 1 - column].state = State::ORC_KEEP;
 		}
 	}
-	for (Uint8 row = 1; row < 10; ++row) // river
+	for (size_t row = 1; row < 10; ++row) // river
 	{
-		for (Uint8 column = 10; column < 15; ++column)
+		for (size_t column = 10; column < 15; ++column)
 		{
 			tile.info[row][column].state = State::BLANK;
 			tile.info[ROW - 1 - row][column].state = State::BLANK;
 		}
 	}
-	for (Uint8 column = 10; column < 15; ++column) // bridges
+	for (size_t column = 10; column < 15; ++column) // bridges
 	{
 		tile.info[3][column].state = State::NEUTRAL;
 		tile.info[4][column].state = State::NEUTRAL;
@@ -262,25 +287,25 @@ void Combat1::initializeInfo(void)
 		tile.info[14][column].state = State::NEUTRAL;
 		tile.info[15][column].state = State::NEUTRAL;
 	}
-	for (Uint8 row = 8; row < 11; ++row)
+	for (size_t row = 8; row < 11; ++row)
 	{
-		for (Uint8 column = 7; column < 10; ++column)
+		for (size_t column = 7; column < 10; ++column)
 		{
 			tile.info[row][column].state = State::HUMAN_ALTAR;
 			tile.info[ROW - 1 - row][COLUMN - 1 - column].state = State::ORC_ALTAR;
 		}
 	}
-	for (Uint8 row = 9; row < 11; ++row)
+	for (size_t row = 9; row < 11; ++row)
 	{
-		for (Uint8 column = 4; column < 6; ++column)
+		for (size_t column = 4; column < 6; ++column)
 		{
 			tile.info[row][column].state = State::HUMAN_TOWER;
 			tile.info[ROW - 1 - row][COLUMN - 1 - column].state = State::ORC_TOWER;
 		}
 	}
-	for (Uint8 row = 1; row < 3; ++row)
+	for (size_t row = 1; row < 3; ++row)
 	{
-		for (Uint8 column = 8; column < 10; ++column)
+		for (size_t column = 8; column < 10; ++column)
 		{
 			tile.info[row][column].state = State::ORC_FARM;
 			tile.info[ROW - 1 - row][COLUMN - 1 - column].state = State::HUMAN_FARM;

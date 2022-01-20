@@ -22,5 +22,5 @@ protected:
 private:
 	SDL_Renderer* renderer;
 
-	SDL_Color* current, human, orc;
+	const SDL_Color* current, human, orc;
 };

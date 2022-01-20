@@ -43,7 +43,6 @@ void MainMenu::render()
 	TextureManager::draw(muteButton, destinationMute, renderer);
 
 	text.draw();
-
 	cursor.draw(mouse);
 
 	SDL_RenderPresent(renderer);
@@ -130,7 +129,30 @@ void MainMenu::handleEvents()
 				}
 				else if (current[1] == button.selected)
 				{
-					//load
+					load.read();
+
+					switch (load.getScenario())
+					{
+						case 't':
+						{
+							break;
+						}
+						case '1':
+						{
+							Game1* game = new Game1(renderer, mouse, load.getTileInfo(), load.getHumanReceipt(), load.getOrcReceipt(), load.getTurn());
+							start(game);
+							delete game;
+							break;
+						}
+						case '2':
+						{
+							break;
+						}
+						case '3':
+						{
+
+						}
+					}
 				}
 				else if(current[2] == button.selected)
 				{

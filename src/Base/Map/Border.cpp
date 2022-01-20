@@ -26,7 +26,7 @@ void Border::draw(void)
 	destination.x = 0;
 	TextureManager::draw(current->wall.corner.SouthWest, destination, renderer);
 
-	for (Uint8 column = 1; column < COLUMN - 1; ++column)
+	for (size_t column = 1; column < COLUMN - 1; ++column)
 	{
 		destination.x = column * SCALE;
 		destination.y = 0;
@@ -35,7 +35,7 @@ void Border::draw(void)
 		destination.y = (ROW - 1) * SCALE;
 		TextureManager::draw(current->wall.horizontal[column < 13 ? (column / 2) % 2 : (column / 4) % 2], destination, renderer);
 	}
-	for (Uint8 row = 1; row < ROW - 1; ++row)
+	for (size_t row = 1; row < ROW - 1; ++row)
 	{
 		destination.x = 0;
 		destination.y = row * SCALE;
@@ -44,9 +44,9 @@ void Border::draw(void)
 		destination.x = (COLUMN - 1) * SCALE;
 		TextureManager::draw(current->wall.vertical[row < 10 ? (row / 2) % 2 : (row / 5) % 2], destination, renderer);
 	}
-	for (Uint8 row = 1; row < ROW - 1; ++row)
+	for (size_t row = 1; row < ROW - 1; ++row)
 	{
-		for (Uint8 column = 1; column < 4; ++column)
+		for (size_t column = 1; column < 4; ++column)
 		{
 			destination.x = column * SCALE;
 			destination.y = row * SCALE;
@@ -102,7 +102,7 @@ void Border::destroyTextures(void)
 	TextureManager::destroy(orc.wall.corner.SouthEast);
 	TextureManager::destroy(orc.wall.corner.SouthWest);
 
-	for (Uint8 i = 0; i < 2; ++i)
+	for (size_t i = 0; i < 2; ++i)
 	{
 		TextureManager::destroy(human.stone[i]);
 		TextureManager::destroy(human.wall.vertical[i]);

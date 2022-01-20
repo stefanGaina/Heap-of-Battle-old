@@ -21,10 +21,6 @@ void Menu2::draw(Receipt human, Receipt orc, Faction turn)
 			{
 				case State::HUMAN_KEEP_1:
 				{
-					frame.humanKeep();
-					write.humanKeep();
-					icon.humanKeep();
-					break;
 				}
 				case State::HUMAN_KEEP_2:
 				{
@@ -54,7 +50,22 @@ void Menu2::draw(Receipt human, Receipt orc, Faction turn)
 
 			switch (type)
 			{
-
+				case State::ORC_KEEP_1:
+				{
+				}
+				case State::ORC_KEEP_2:
+				{
+					frame.orcKeep();
+					write.orcKeep();
+					icon.orcKeep();
+					break;
+				}
+				default:
+				{
+					frame.orcAttack(hasAttacked);
+					write.orcUnit(actionsLeft);
+					icon.orcUnit(type, hasAttacked);
+				}
 			}
 		}
 	}

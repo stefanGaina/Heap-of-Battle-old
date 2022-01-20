@@ -1,10 +1,13 @@
 #pragma once
 #include "Combat0.h"
+#include "Spawn.h"
 
 class Combat1 : public Combat0
 {
 public:
 	Combat1(SDL_Renderer* renderer, TileInfo* tile);
+
+	void train(State unit);
 
 	void checkPortals(bool finishAnimation);
 
@@ -17,11 +20,14 @@ public:
 	Faction capturePoint(Coordinate point);
 	Faction captureAltar(Faction point[3]);
 
+	void boostSpawns(void);
 	void boostFarms(void);
 	void boostTowers(Flag flag);
 
 	void trainFarm(State unit0, State unit1);
 	void trainFarms(Uint8 turn, Flag flag);
+
+	const Spawn human, orc;
 
 private:
 	void initializeInfo(void);

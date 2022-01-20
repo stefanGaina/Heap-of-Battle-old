@@ -9,12 +9,11 @@ class Combat0
 public:
 	Combat0(SDL_Renderer* renderer, TileInfo* tile = nullptr);
 
+	virtual void train(State unit) = 0;
+	virtual void boostSpawns(void) = 0;
+
 	void draw(void);
-
 	void refresh(Faction turn);
-
-	void train(State unit);
-
 	void engage(Engage engaged = Engage::NO, Coordinate click = { 0, 0 });
 
 	bool canMove(Coordinate click);
@@ -27,13 +26,9 @@ public:
 	TileInfo* getTileInfo(void);
 
 	Animation animation;
-
 	Highlight highlight;
-
 	Movement movement;
-
 	Queue queue;
-
 	Unit unit;
 
 protected:

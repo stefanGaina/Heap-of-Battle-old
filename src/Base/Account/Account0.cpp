@@ -15,14 +15,14 @@ Income::Income(Receipt human, Receipt orc) :
 {
 }
 
-Account0::Account0(Receipt human, Receipt orc) : 
-	price(PriceValue::VAMP), income(human, orc)
+Account0::Account0(Receipt human, Receipt orc, Uint8 turn) : 
+	price(PriceValue::VAMP), income(human, orc), turn(turn)
 {
 }
 
 bool Account0::canAfford(State unit)
 {
-	Uint8 price = Account0::price.get(unit);
+	Uint8 price = this->price.get(unit);
 
 	if (unit > State::NEUTRAL)
 	{
@@ -31,9 +31,8 @@ bool Account0::canAfford(State unit)
 			income.human.gold.update(-price);
 			return true;
 		}
-		return false;
 	}
-	if (income.orc.gold.get() >= price)
+	else if (income.orc.gold.get() >= price)
 	{
 		income.orc.gold.update(-price);
 		return true;

@@ -1,6 +1,6 @@
 #pragma once
-#include "TileInfo.h"
 #include "AnimationTexture.h"
+#include "TileInfo.h"
 #include "Queue.h"
 
 class Animation : private AnimationTexture

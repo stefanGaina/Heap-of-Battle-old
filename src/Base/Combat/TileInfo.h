@@ -8,7 +8,7 @@ struct Info
 	Color highlight;
 
 	Uint8 distance;
-	Uint8 actionsLeft;
+	Uint16 actionsLeft;
 
 	bool hasAttacked;
 	bool notSelected;

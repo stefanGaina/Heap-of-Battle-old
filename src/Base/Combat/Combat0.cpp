@@ -11,12 +11,12 @@ Combat0::Combat0(SDL_Renderer* renderer, TileInfo* tile) :
 			for (size_t column = 0; column < COLUMN; ++column)
 			{
 				this->tile.info[row][column].state = tile->info[row][column].state;
-				this->tile.info[row][column].show = (Show)tile->info[row][column].state;
+				this->tile.info[row][column].show = tile->info[row][column].show;
 				this->tile.info[row][column].highlight = Color::UNHIGHLIGHT;
 				this->tile.info[row][column].distance = 10;
 				this->tile.info[row][column].actionsLeft = tile->info[row][column].actionsLeft;
 				this->tile.info[row][column].hasAttacked = tile->info[row][column].hasAttacked;
-				this->tile.info[row][column].notSelected = false;
+				this->tile.info[row][column].notSelected = tile->info[row][column].notSelected;
 			}
 		}
 	}
@@ -37,10 +37,9 @@ void Combat0::draw(void)
 
 void Combat0::refresh(Faction turn)
 {
-	unit.refresh(turn);
-
 	engaged = Engage::NO;
 
+	unit.refresh(turn);
 	highlight.reset(remember.x, remember.y, tile.info[remember.x][remember.y].actionsLeft);
 }
 
@@ -54,22 +53,6 @@ void Combat0::engage(Engage engaged, Coordinate click)
 		tile.info[click.x][click.y].notSelected = false;
 		highlight.path(click, tile.info[click.x][click.y].actionsLeft);
 	}
-}
-
-void Combat0::train(State unit)
-{
-	Coordinate spawn;
-
-	if (unit > State::NEUTRAL)
-	{
-		spawn = { 17, 8 };
-	}
-	else
-	{
-		spawn = { 1, 16 };
-	}
-	this->unit.train(unit, spawn);
-	engage(Engage::UNIT, spawn);
 }
 
 bool Combat0::canMove(Coordinate click)

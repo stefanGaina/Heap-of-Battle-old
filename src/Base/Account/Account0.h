@@ -15,14 +15,14 @@ struct Income0
 struct Income
 {
 	Income(Receipt human, Receipt orc);
-	
+
 	Income0 human, orc;
 };
 
 class Account0
 {
 public:
-	Account0(Receipt human, Receipt orc);
+	Account0(Receipt human, Receipt orc, Uint8 turn);
 	
 	bool canAfford(State unit);
 	void addYield(void);

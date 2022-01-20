@@ -4,12 +4,6 @@
 Unit::Unit(TileInfo* tile, SDL_Renderer* renderer) : 
 	tile(tile), renderer(renderer), destination({ 0, 0, SCALE, SCALE })
 {
-	human.spawn.x = 17;
-	human.spawn.y = 8;
-
-	orc.spawn.x = 1;
-	orc.spawn.y = 16;
-
 	action[0] = EMPTY;
 	action[1] = INFANTRY_ACTION;
 	action[2] = ARCHER_ACTION;
@@ -123,17 +117,7 @@ void Unit::refresh(Faction turn)
 	}
 }
 
-bool Unit::humanSpawnAvailable(void)
-{
-	return tile->info[human.spawn.x][human.spawn.y].state == State::NEUTRAL;
-}
-
-bool Unit::orcSpawnAvailable(void)
-{
-	return tile->info[orc.spawn.x][orc.spawn.y].state == State::NEUTRAL;
-}
-
-void Unit::train(State unit, Coordinate spawn)
+void Unit::train(State unit, const Coordinate& spawn)
 {
 	tile->info[spawn.x][spawn.y].state = unit;
 	tile->info[spawn.x][spawn.y].show = (Show)unit;
@@ -141,12 +125,6 @@ void Unit::train(State unit, Coordinate spawn)
 	reset(spawn, action[index(unit)] + 1);
 
 	tile->info[spawn.x][spawn.y].notSelected = false;
-}
-
-void Unit::boostSpawns(void)
-{
-	++tile->info[human.spawn.x][human.spawn.y].actionsLeft;
-	++tile->info[orc.spawn.x][orc.spawn.y].actionsLeft;
 }
 
 Uint8 Unit::getAction(Uint8 index)

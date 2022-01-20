@@ -10,8 +10,7 @@
 class Game1 : public Game0
 {
 public:
-	//Game1(SDL_Renderer* renderer);
-	Game1(SDL_Renderer* renderer, const Mouse& mouse, TileInfo* tile = nullptr, Receipt human = { 10, 15 }, Receipt orc = { 0,15 });
+	Game1(SDL_Renderer* renderer, const Mouse& mouse, TileInfo* tile = nullptr, Receipt human = { 10, 15 }, Receipt orc = { 0,15 }, Uint8 turn = 1);
 
 	void render(void);
 	void handleEvents(void);

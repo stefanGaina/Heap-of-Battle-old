@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include <iostream>
 
 struct Mouse
 {
@@ -13,7 +14,7 @@ struct Coordinate
 
 struct Receipt
 {
-	Uint8 gold, yield;
+	Uint16 gold, yield;
 };
 
 enum class Faction
@@ -71,7 +72,7 @@ enum class State
 
 	HUMAN_PAUSE = 16,
 	HUMAN_PASS_TURN = 17,
-	
+
 	HUMAN_ALTAR = 21,
 	HUMAN_FARM = 22,
 	HUMAN_TOWER = 23,
@@ -97,7 +98,7 @@ enum class State
 	ORC_FARM = -22,
 	ORC_TOWER = -23,
 
-	MINE, LABORATORY,
+	MINE, LABORATORY
 };
 
 enum class Show

@@ -1,4 +1,5 @@
 #include "Game2.h"
+#include "Log.h"
 
 Game2::Game2(SDL_Renderer* renderer, const Mouse& mouse) : 
 	Game0(renderer, mouse), account({ 5, 15 }, { 0, 15 }), combat(renderer), map(renderer), menu(renderer), outline(renderer)
@@ -10,8 +11,12 @@ void Game2::render(void)
 	SDL_RenderClear(renderer);
 
 	map.draw();
+	combat.draw();
 	menu.draw(account.income.human.get(), account.income.orc.get(), account.turn.get());
 
+	pause.draw();
+	pause.victory.draw();
+	outline.draw();
 	cursor.draw(mouse);
 
 	SDL_RenderPresent(renderer);
@@ -43,7 +48,9 @@ void Game2::handleEvents(void)
 
 					Coordinate click = { mouse.y / SCALE, mouse.x / SCALE };
 					State state = combat.getState(click);
-
+#ifdef DEBUG
+					LOG("(" << (int)click.x << ", " << (int)click.y << ")");
+#endif
 					switch (state)
 					{
 						case State::HUMAN_PAUSE:
@@ -67,7 +74,10 @@ void Game2::handleEvents(void)
 								}
 								case Engage::KEEP_1:
 								{
-									if (!humanKeep1(state))
+								}
+								case Engage::KEEP_2:
+								{
+									if (!humanKeep(state))
 									{
 										humanNo(state, click);
 									}
@@ -125,9 +135,12 @@ void Game2::handleEvents(void)
 									orcNo(state, click);
 									break;
 								}
-								case Engage::KEEP:
+								case Engage::KEEP_1:
 								{
-									if (!orcBuilding(state))
+								}
+								case Engage::KEEP_2:
+								{
+									if (!orcKeep(state))
 									{
 										orcNo(state, click);
 									}
@@ -157,7 +170,7 @@ void Game2::handleEvents(void)
 						}
 					}
 				}
-				checkVictory();
+				checkVictory(); //
 				break;
 			}
 			case SDL_KEYDOWN:
@@ -211,6 +224,8 @@ void Game2::pauseGame(void)
 
 void Game2::passTurn(void)
 {
+	sound.soundEffect.play(Sound::RECEIVE_GOLD);
+
 	account.turn.change();
 	account.addYield();
 
@@ -218,21 +233,11 @@ void Game2::passTurn(void)
 	outline.change();
 	cursor.change();
 
-	//combat.trainFarms(account.turn.getValue(), { account.human.farm.get(), account.orc.farm.get() });
-
 	combat.refresh(account.turn.get());
 	combat.highlight.set((Color)account.turn.get());
-
-	//combat.unit.boostSpawns();
-	//combat.boostFarms();
-	//combat.boostTowers({ account.human.farm.get(), account.orc.farm.get() });
+	combat.boostSpawns();
 
 	menu.set();
-
-	if (account.turn.get() == Faction::HUMAN && account.income.human.yield.get() != 0 || account.turn.get() == Faction::ORC && account.income.orc.yield.get() != 0)
-	{
-		sound.soundEffect.play(Sound::RECEIVE_GOLD);
-	}
 }
 
 void Game2::humanNo(State state, Coordinate click)
@@ -240,37 +245,39 @@ void Game2::humanNo(State state, Coordinate click)
 	if (state == State::HUMAN_KEEP_1)
 	{
 		combat.engage(Engage::KEEP_1);
-		menu.set(State::HUMAN_KEEP, 0, 0);
+		menu.set(State::HUMAN_KEEP);
+	}
+	else if (state == State::HUMAN_KEEP_2)
+	{
+		combat.engage(Engage::KEEP_2);
+		menu.set(State::HUMAN_KEEP);
+	}
+	else if (state >= State::HUMAN_INFANTRY && state <= State::HUMAN_WING)
+	{
+		sound.voiceLine.play(state, Sound::SELECT);
+		combat.engage(Engage::UNIT, click);
+		menu.set(state, combat.getActions(click), combat.getAttacked(click));
 	}
 	else
 	{
-		if (state >= State::HUMAN_INFANTRY && state <= State::HUMAN_WING)
-		{
-			sound.voiceLine.play(state, Sound::SELECT);
-			combat.engage(Engage::UNIT, click);
-			menu.set(state, combat.getActions(click), combat.getAttacked(click));
-		}
-		else
-		{
-			combat.engage();
-			menu.set();
-		}
+		combat.engage();
+		menu.set();
 	}
 }
 
-bool Game2::humanKeep1(State state)
+bool Game2::humanKeep(State state)
 {
 	if (state >= State::TRAIN_HUMAN_INFANTRY && state <= State::TRAIN_HUMAN_WING)
 	{
-		if (combat.unit.humanSpawnAvailable())
+		if (combat.humanSpawnAvailable())
 		{
-			state = (State)((Uint8)state - 10); // conversion from train_unit to unit
+			state = (State)((int)state - 10); // conversion from train_unit to unit
 
 			if (account.canAfford(state))
 			{
 				combat.train(state);
 				sound.voiceLine.play(state, Sound::TRAIN);
-				menu.set(state, combat.getActions({ 17, 8 }), false);
+				menu.set(state, combat.getActions(combat.getHumanSpawn()), false);
 			}
 			else
 			{
@@ -291,32 +298,34 @@ bool Game2::humanKeep1(State state)
 
 void Game2::orcNo(State state, Coordinate click)
 {
-	if (state == State::ORC_KEEP)
+	if (state == State::ORC_KEEP_1)
 	{
 		combat.engage(Engage::KEEP);
-		menu.set(State::ORC_KEEP, 0, 0);
+		menu.set(State::ORC_KEEP);
+	}
+	else if (state == State::ORC_KEEP_2)
+	{
+		combat.engage(Engage::KEEP_2);
+		menu.set(State::ORC_KEEP);
+	}
+	else if (state >= State::ORC_WING && state <= State::ORC_INFANTRY)
+	{
+		sound.voiceLine.play(state, Sound::SELECT);
+		combat.engage(Engage::UNIT, click);
+		menu.set(state, combat.getActions(click), combat.getAttacked(click));
 	}
 	else
 	{
-		if (state >= State::ORC_WING && state <= State::ORC_INFANTRY)
-		{
-			sound.voiceLine.play(state, Sound::SELECT);
-			combat.engage(Engage::UNIT, click);
-			menu.set(state, combat.getActions(click), combat.getAttacked(click));
-		}
-		else
-		{
-			combat.engage();
-			menu.set();
-		}
+		combat.engage();
+		menu.set();
 	}
 }
 
-bool Game2::orcBuilding(State state)
+bool Game2::orcKeep(State state)
 {
 	if (state >= State::TRAIN_ORC_WING && state <= State::TRAIN_ORC_INFANTRY)
 	{
-		if (combat.unit.orcSpawnAvailable())
+		if (combat.orcSpawnAvailable())
 		{
 			state = (State)((Sint8)state + 10);
 
@@ -324,7 +333,7 @@ bool Game2::orcBuilding(State state)
 			{
 				combat.train(state);
 				sound.voiceLine.play(state, Sound::TRAIN);
-				menu.set(state, combat.getActions({ 1, 16 }), false);
+				menu.set(state, combat.getActions(combat.getOrcSpawn()), false);
 			}
 			else
 			{
@@ -338,31 +347,7 @@ bool Game2::orcBuilding(State state)
 	}
 	else
 	{
-		if (state == State::VAMP_ORC_KEEP)
-		{
-			/*if (account.orc.vamp.get())
-			{
-				sound.soundEffect.play(Sound::error);
-			}
-			else
-			{
-				if (account.canAfford(State::orc_keep))
-				{
-					map.building.vampOrcKeep();
-					account.vamp(Faction::orc);
-					sound.soundEffect.play(Sound::vamp);
-					menu.set(State::orc_keep, 0, 0, true);
-				}
-				else
-				{
-					sound.soundEffect.play(Sound::orc_more_gold);
-				}
-			}*/
-		}
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 	return true;
 }
@@ -396,5 +381,5 @@ bool Game2::caseUnit(Coordinate click)
 
 void Game2::checkVictory(void)
 {
-
+	// TO DO
 }

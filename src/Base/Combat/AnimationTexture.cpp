@@ -1,7 +1,8 @@
 #include "AnimationTexture.h"
 #include "TextureManager.h"
 
-AnimationTexture::AnimationTexture(SDL_Renderer* renderer) : renderer(renderer)
+AnimationTexture::AnimationTexture(SDL_Renderer* renderer) : 
+	renderer(renderer)
 {
 	loadTextures();
 }

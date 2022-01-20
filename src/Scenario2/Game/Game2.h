@@ -21,10 +21,10 @@ private:
 	void checkVictory(void);
 
 	void humanNo(State state, Coordinate click = { 0,0 });
-	bool humanKeep1(State state);
+	bool humanKeep(State state);
 
 	void orcNo(State state, Coordinate = { 0,0 });
-	bool orcBuilding(State state);
+	bool orcKeep(State state);
 
 	bool caseUnit(Coordinate click);
 

@@ -1,11 +1,11 @@
 #include "Turn.h"
 
-Turn::Turn(void) : 
-	turn(1)
+Turn::Turn(Uint16 turn) : 
+	turn(turn)
 {
 }
 
-Uint8 Turn::getValue(void)
+Uint16 Turn::getValue(void)
 {
 	return turn;
 }

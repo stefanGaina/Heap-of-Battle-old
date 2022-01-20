@@ -56,7 +56,7 @@ private:
 	SDL_Texture* scenario[4];
 	SDL_Texture* current[5];
 
-	SelectIcon idle, selected; // invers
+	SelectIcon idle, selected; //
 
 	SelectEngage engaged;
 };
